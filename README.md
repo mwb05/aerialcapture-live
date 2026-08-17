@@ -22,11 +22,17 @@ any static host.
 | `sitemap.xml` | The 4 real pages only — the 6 leftover Hostinger pottery demo pages are gone |
 | `robots.txt` | Allows all, points at the sitemap |
 
-## Formspree placeholder — ACTION REQUIRED before launch
+## Contact form — currently a mail-client handoff
 
-The contact form posts to `https://formspree.io/f/PLACEHOLDER`. Create a free form at
-formspree.io (point it at aerialcapturephotography@gmail.com), then replace `PLACEHOLDER`
-in `contact.html` with the real form ID. Until then the form will not deliver.
+There is no form backend yet, so the form does **not** post anywhere. On submit, `js/main.js`
+opens the visitor's own email app with the subject and message prefilled to
+aerialcapturephotography@gmail.com, and shows a line telling them to hit send. No message is
+silently lost, but it does require the visitor to have a working mail client.
+
+To upgrade to a real backend: create a free form at formspree.io pointed at
+aerialcapturephotography@gmail.com, then in `contact.html` set
+`action="https://formspree.io/f/<id>"` and delete the `data-mailto-fallback` attribute
+(that attribute is what activates the fallback handler).
 
 ## Image optimization report
 
@@ -50,11 +56,30 @@ Filenames were normalized (hash suffixes stripped): e.g.
 `dji_fly_20250421_184918_677_..._photo-m2Wq4gxKywT7v2oE.jpg` → `dji-fly-20250421-184918.jpg`.
 The three 2022 hash-named uploads became `aerial-2022-01` … `aerial-2022-04`.
 
-## Deploy notes
+## Deploy — LIVE on GitHub Pages (as of 2026-08-16)
 
-- Any static host works: Hostinger's plain static hosting, Netlify, Cloudflare Pages,
-  GitHub Pages, S3. Upload the contents of this folder as the web root.
-- DNS stays at Hostinger — just point the domain (A/CNAME) at wherever this is hosted.
+Production copy lives in `C:\ClaudeCode\websites\_deploy\aerialcapture-live\`, pushed to the
+public repo **mwb05/aerialcapture-live**, served by GitHub Pages with a `CNAME` file claiming
+`aerialcapturephotography.com`. To publish a change: copy the changed files into that folder,
+then `git add -A && git commit -m "..." && git push` — Pages rebuilds in under a minute.
+
+DNS to set at Hostinger (nameservers stay ns1/ns2.dns-parking.com):
+
+| Type | Name | Value |
+|---|---|---|
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+| CNAME | www | mwb05.github.io |
+
+Remove the old Hostinger A records (148.135.128.150, 92.112.198.193) and the old
+`www → *.cdn.hstgr.net` CNAME. After propagation, GitHub issues a Let's Encrypt cert
+automatically; then turn on "Enforce HTTPS" (or `gh api -X PUT repos/mwb05/aerialcapture-live/pages -F https_enforced=true`).
+
+- Verified pre-cutover by resolving the domain to a GitHub Pages IP: home, gallery, and
+  assets all returned 200 with the correct page title.
+- Any other static host also works (Netlify, Cloudflare Pages, S3) — upload this folder as the web root.
 - Canonical URLs and the sitemap assume `https://aerialcapturephotography.com` at the root.
 - Old URLs `/about-us` and `/gallery` → if the host supports redirects, add
   `/about-us → /about.html`, `/gallery → /gallery.html`, `/contact → /contact.html`.
