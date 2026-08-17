@@ -271,6 +271,13 @@ p { margin: 0 0 1.2em; }
   max-width: 46rem;
 }
 .hero-content h1 { text-shadow: 0 2px 24px rgba(0,0,0,.5); }
+.hero-mark {
+  display: block;
+  height: clamp(64px, 9vw, 96px);
+  width: auto;
+  margin-bottom: 1.1rem;
+  filter: drop-shadow(0 8px 22px rgba(0,0,0,.6));
+}
 .hero-tagline {
   color: rgba(242, 244, 243, .92);
   font-size: clamp(1.05rem, 2vw, 1.3rem);
@@ -397,6 +404,22 @@ p { margin: 0 0 1.2em; }
 }
 .cta-band .lede { margin-inline: auto; }
 .cta-band .btn { margin-top: 1.4rem; }
+/* Oversized badge watermark, bled off the right edge of every CTA band. */
+.cta-band { position: relative; overflow: hidden; }
+.cta-band > .container { position: relative; z-index: 1; }
+.cta-band::after {
+  content: "";
+  position: absolute;
+  right: clamp(-60px, -3vw, 0px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 394px;
+  background: url("../assets/logo.png") center / contain no-repeat;
+  opacity: .09;
+  pointer-events: none;
+}
+@media (max-width: 900px) { .cta-band::after { display: none; } }
 
 /* --------------------------------------------------------------------------
    About — editorial rows
@@ -616,7 +639,7 @@ body.lb-lock { overflow: hidden; }
   color: var(--text);
   font-weight: 700;
 }
-.footer-brand img { height: 38px; width: auto; }
+.footer-brand img { height: 118px; width: auto; }
 .footer-tag { margin-top: .8rem; max-width: 34ch; }
 
 .site-footer h3 {
