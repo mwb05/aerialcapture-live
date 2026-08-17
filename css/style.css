@@ -4,14 +4,15 @@
    ========================================================================== */
 
 :root {
-  --bg: #0B0D0C;
-  --surface: #131716;
-  --surface-2: #1A1F1D;
-  --line: #262C29;
-  --text: #F2F4F3;
-  --muted: #AEB6B2;
-  --accent: #81C1E8;
-  --accent-strong: #A5D4F0;
+  --bg: #080D14;
+  --surface: #0F1724;
+  --surface-2: #16202E;
+  --line: #24303F;
+  --text: #EEF2F6;
+  --muted: #A6B2C0;
+  --accent: #6D8DAA;
+  --accent-strong: #93AFC8;
+  --sage: #5E6F66;
   --header-h: 72px;
   --radius: 6px;
   --ease: cubic-bezier(.22, .61, .36, 1);
@@ -43,7 +44,7 @@ a:hover { color: var(--accent-strong); }
   border-radius: 2px;
 }
 
-::selection { background: rgba(129, 193, 232, .28); }
+::selection { background: rgba(109, 141, 170, .30); }
 
 h1, h2, h3 {
   font-weight: 700;
@@ -83,12 +84,12 @@ p { margin: 0 0 1.2em; }
   top: 0;
   z-index: 200;
   background: var(--accent);
-  color: #06222F;
+  color: #0B1522;
   padding: .6rem 1rem;
   font-weight: 600;
   border-radius: 0 0 var(--radius) 0;
 }
-.skip-link:focus { left: 0; color: #06222F; }
+.skip-link:focus { left: 0; color: #0B1522; }
 
 /* --------------------------------------------------------------------------
    Buttons
@@ -108,8 +109,8 @@ p { margin: 0 0 1.2em; }
 }
 .btn:active { transform: translateY(1px); }
 
-.btn-primary { background: var(--accent); color: #06222F; }
-.btn-primary:hover { background: var(--accent-strong); color: #06222F; }
+.btn-primary { background: var(--accent); color: #0B1522; }
+.btn-primary:hover { background: var(--accent-strong); color: #0B1522; }
 
 .btn-ghost { border-color: rgba(242, 244, 243, .45); color: var(--text); }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
@@ -271,12 +272,26 @@ p { margin: 0 0 1.2em; }
   max-width: 46rem;
 }
 .hero-content h1 { text-shadow: 0 2px 24px rgba(0,0,0,.5); }
-.hero-mark {
-  display: block;
-  height: clamp(64px, 9vw, 96px);
-  width: auto;
-  margin-bottom: 1.1rem;
-  filter: drop-shadow(0 8px 22px rgba(0,0,0,.6));
+/* Over photography the brand blue is too quiet — lift it and add a shadow. */
+.hero-content .kicker {
+  color: var(--accent-strong);
+  text-shadow: 0 2px 14px rgba(0,0,0,.85), 0 0 3px rgba(0,0,0,.6);
+}
+/* Brand band — the full lockup on a plain ground, never over photography. */
+.brand-band {
+  background: var(--surface);
+  border-block: 1px solid var(--line);
+  text-align: center;
+}
+.brand-band img {
+  width: min(340px, 62vw);
+  height: auto;
+  margin-inline: auto;
+}
+.brand-band p {
+  color: var(--muted);
+  max-width: 46ch;
+  margin: 1.6rem auto 0;
 }
 .hero-tagline {
   color: rgba(242, 244, 243, .92);
@@ -297,7 +312,7 @@ p { margin: 0 0 1.2em; }
   padding: calc(var(--header-h) + clamp(3rem, 8vw, 5.5rem)) 0 clamp(2.5rem, 6vw, 4rem);
   border-bottom: 1px solid var(--line);
   background:
-    radial-gradient(1200px 400px at 20% -10%, rgba(129,193,232,.10), transparent 60%),
+    radial-gradient(1200px 400px at 20% -10%, rgba(109,141,170,.12), transparent 60%),
     var(--surface);
 }
 .page-hero .lede { margin-bottom: 0; }
@@ -397,7 +412,7 @@ p { margin: 0 0 1.2em; }
 
 .cta-band {
   background:
-    radial-gradient(900px 300px at 80% 120%, rgba(129,193,232,.14), transparent 65%),
+    radial-gradient(900px 300px at 80% 120%, rgba(109,141,170,.16), transparent 65%),
     var(--surface);
   border-block: 1px solid var(--line);
   text-align: center;
@@ -540,7 +555,7 @@ p { margin: 0 0 1.2em; }
   justify-content: center;
   transition: background-color .2s, border-color .2s;
 }
-.lb-btn:hover { background: rgba(129, 193, 232, .22); border-color: var(--accent); }
+.lb-btn:hover { background: rgba(109, 141, 170, .24); border-color: var(--accent); }
 .lb-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; }
 
 .lb-close { top: 18px; right: 18px; }
@@ -606,7 +621,7 @@ body.lb-lock { overflow: hidden; }
 .form-field textarea:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(129, 193, 232, .18);
+  box-shadow: 0 0 0 3px rgba(109, 141, 170, .20);
 }
 .form-field textarea { min-height: 160px; resize: vertical; }
 .form-field input::placeholder,
