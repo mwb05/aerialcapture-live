@@ -155,7 +155,7 @@ p { margin: 0 0 1.2em; }
   white-space: nowrap;
 }
 .brand:hover { color: var(--text); }
-.brand img { width: 40px; height: 40px; border-radius: 50%; }
+.brand img { height: 42px; width: auto; }
 
 .site-nav ul {
   display: flex;
@@ -616,7 +616,7 @@ body.lb-lock { overflow: hidden; }
   color: var(--text);
   font-weight: 700;
 }
-.footer-brand img { width: 36px; height: 36px; border-radius: 50%; }
+.footer-brand img { height: 38px; width: auto; }
 .footer-tag { margin-top: .8rem; max-width: 34ch; }
 
 .site-footer h3 {
