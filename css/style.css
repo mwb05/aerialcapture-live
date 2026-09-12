@@ -62,7 +62,7 @@ p { margin: 0 0 1.2em; }
 .display-i { font-style: italic; }
 
 .container { width: min(1360px, 100% - 2 * var(--gutter)); margin-inline: auto; }
-.section { padding: clamp(4rem, 10vw, 9rem) 0; position: relative; }
+.section { padding: clamp(3rem, 6vw, 5.5rem) 0; position: relative; }
 
 .kicker {
   display: flex;
@@ -346,7 +346,7 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
 /* Interior page hero */
 .page-hero {
   position: relative; overflow: hidden;
-  padding: calc(var(--header-h) + clamp(4rem, 12vw, 8rem)) 0 clamp(2.5rem, 6vw, 4.5rem);
+  padding: calc(var(--header-h) + clamp(3rem, 8vw, 5.5rem)) 0 clamp(2rem, 4vw, 3.5rem);
   border-bottom: 1px solid var(--line);
   background: radial-gradient(1000px 500px at 15% -20%, var(--accent-glow), transparent 60%), var(--bg);
 }
@@ -363,7 +363,7 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
 
 /* Tight bottom padding on purpose: the fly-through below is pinned and starts dark, so any extra
    space here reads as a dead gap between the statement and "Fly through the frames". */
-.statement { padding: clamp(4rem, 9vw, 7rem) 0 clamp(1.5rem, 4vw, 3rem); }
+.statement { padding: clamp(3rem, 6vw, 5rem) 0 clamp(1.5rem, 3vw, 2.5rem); }
 .statement-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
 .statement-media { margin: 0; border-radius: var(--radius); overflow: hidden; }
 .statement-media img { display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; }
@@ -413,7 +413,7 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
    Filmstrip — horizontal travel while pinned
    -------------------------------------------------------------------------- */
 
-.filmstrip { position: relative; overflow: hidden; padding: clamp(4rem, 8vw, 6rem) 0 0; }
+.filmstrip { position: relative; overflow: hidden; padding: clamp(2.5rem, 5vw, 4rem) 0 0; }
 .filmstrip-viewport { position: relative; height: 100svh; display: flex; align-items: center; overflow: hidden; }
 .filmstrip-track { display: flex; gap: clamp(1rem, 2.5vw, 2.4rem); padding-left: var(--gutter); padding-right: var(--gutter); will-change: transform; }
 .frame {
@@ -449,21 +449,25 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
   .filmstrip-viewport::-webkit-scrollbar { display: none; }
   .frame { height: 60vh; scroll-snap-align: center; }
   .filmstrip-foot { display: none; }
-  .filmstrip { padding-bottom: 3rem; }
+  .filmstrip { padding-bottom: 2rem; }
 }
 
 /* --------------------------------------------------------------------------
    Chapters — sticky media, scrolling copy
    -------------------------------------------------------------------------- */
 
-.chapters { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 6rem); align-items: start; }
-.chapters-media { position: sticky; top: calc(var(--header-h) + 2vh); height: calc(100svh - var(--header-h) - 4vh); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+/* --ch-h is shared by the sticky image and each chapter's min-height so the photo sits dead centre
+   in the viewport for every chapter, including the first and last: the image is pinned at
+   (100svh - --ch-h) / 2 from the top, and each text block is the same height with its copy
+   centred. Capped below the header height on both sides so the header never overlaps it. */
+.chapters { --ch-h: min(calc(100svh - 2 * var(--header-h)), 72svh); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+.chapters-media { position: sticky; top: calc((100svh - var(--ch-h)) / 2); height: var(--ch-h); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
 .chapters-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity .9s var(--ease), transform 1.6s var(--ease-out); }
 .chapters-media img.is-active { opacity: 1; transform: scale(1); }
 .chapters-media .ch-label { position: absolute; left: 1.4rem; bottom: 1.3rem; z-index: 2; display: flex; gap: 1rem; align-items: baseline; color: var(--text); font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; }
 .chapters-media .ch-label b { font-family: var(--font-display); font-weight: 400; font-size: 2rem; letter-spacing: 0; color: var(--accent-strong); }
 .chapters-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 65%, rgba(5, 8, 13, .7)); pointer-events: none; }
-.chapter { min-height: 80svh; display: grid; align-content: center; padding: 3rem 0; border-bottom: 1px solid var(--line); }
+.chapter { min-height: var(--ch-h); display: grid; align-content: center; padding: 2.5rem 0; border-bottom: 1px solid var(--line); }
 .chapter:last-child { border-bottom: 0; }
 .chapter .num { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); line-height: 1; color: var(--dim); margin-bottom: .6rem; }
 .chapter h2 { font-size: clamp(2rem, 3.6vw, 3.2rem); }
@@ -480,7 +484,7 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
    Services — numbered index rows
    -------------------------------------------------------------------------- */
 
-.services-head { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: end; margin-bottom: 3rem; }
+.services-head { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: end; margin-bottom: 2.25rem; }
 .services-head .lede { margin: 0; }
 .svc-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .svc {
