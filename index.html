@@ -3,20 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Aerial Capture Photography | Drone Automotive &amp; Nature Photography</title>
-  <meta name="description" content="Aerial Capture Photography specializes in cutting-edge drone photography and videography with a focus on automotive and nature — stunning images and video captured from the skies.">
+  <title>Aerial Capture Photography | Cinematic Drone Photography &amp; Video</title>
+  <meta name="description" content="Aerial Capture Photography specializes in cinematic drone photography and videography with a focus on automotive and nature — stunning images and video captured from the skies.">
   <link rel="canonical" href="https://aerialcapturephotography.com/">
+  <meta name="theme-color" content="#05080D">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Aerial Capture Photography | Drone Automotive &amp; Nature Photography">
-  <meta property="og:description" content="Cutting-edge drone photography and videography with a focus on automotive and nature.">
+  <meta property="og:title" content="Aerial Capture Photography | Cinematic Drone Photography &amp; Video">
+  <meta property="og:description" content="Cinematic drone photography and videography with a focus on automotive and nature.">
   <meta property="og:image" content="https://aerialcapturephotography.com/assets/full/dji-fly-20250421-184918.jpg">
   <meta property="og:url" content="https://aerialcapturephotography.com/">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preload" as="image" href="assets/hero.jpg" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">
   {
@@ -34,12 +36,17 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="letterbox top" aria-hidden="true"></div>
+  <div class="letterbox bottom" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" data-label="View" aria-hidden="true"></div>
 
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
-        <img src="assets/logo.png" alt="" width="32" height="42">
-        Aerial Capture Photography
+        <img src="assets/logo.png" alt="" width="29" height="38">
+        <span class="brand-text">Aerial Capture Photography<small>Drone · Automotive · Nature</small></span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
@@ -51,95 +58,198 @@
           <li><a href="gallery.html">Gallery</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
+        <p class="nav-cta">Have a shoot in mind? <a href="mailto:aerialcapturephotography@gmail.com">aerialcapturephotography@gmail.com</a></p>
       </nav>
     </div>
   </header>
 
   <main id="main">
+
+    <!-- ================= HERO ================= -->
     <section class="hero">
       <div class="hero-img">
         <img src="assets/hero.jpg" alt="A Gulf-livery Ford GT40 in light blue and orange parked outside an industrial warehouse" fetchpriority="high" width="2200" height="1377">
       </div>
-      <div class="container hero-content">
-        <span class="kicker">Drone Photography &amp; Videography</span>
-        <h1>Aerial Capture Photography</h1>
-        <p class="hero-tagline">Experience the beauty of the world from a new perspective with our stunning aerial photography.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="gallery.html">View Gallery</a>
-          <a class="btn btn-ghost" href="contact.html">Get in Touch</a>
+      <div class="hero-content">
+        <span class="kicker" data-reveal="fade">Drone Photography &amp; Cinematic Video</span>
+        <h1 class="lines" data-reveal="fade">
+          <span class="line"><span>Aerial Capture</span></span>
+          <span class="line"><span class="display-i">Photography</span></span>
+        </h1>
+        <div class="hero-row">
+          <div>
+            <p class="hero-tagline" data-reveal data-delay="2">Automotive and nature, shot from altitude. The top-down, the slow reveal, the frame most people never get to see.</p>
+            <div class="hero-actions" data-reveal data-delay="3">
+              <a class="btn btn-primary" href="gallery.html">View the work <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+              <a class="btn btn-ghost" href="contact.html">Book a shoot</a>
+            </div>
+          </div>
+          <div class="hero-meta" data-reveal data-delay="3">
+            <span><strong>Automotive</strong> · Nature · Video</span>
+            <span>Stills &amp; 4K aerial footage</span>
+            <span>Featured: Gulf GT40</span>
+          </div>
         </div>
       </div>
+      <div class="scroll-cue" aria-hidden="true">Scroll</div>
     </section>
 
-    <section class="section">
-      <div class="container split">
-        <div>
-          <span class="kicker">From the Sky</span>
-          <h2>Breathtaking images, captured from above</h2>
-          <p class="lede">Aerial Capture Photography is dedicated to capturing breathtaking images and videos from the sky. With a focus on automotive and nature photography, I'm ready to capture the shots you desire.</p>
-        </div>
-        <div class="split-media">
-          <img src="assets/full/aerial-2022-02.jpg" alt="Garage full of classic Porsches, with a yellow racing-livery 911 up front" loading="lazy" decoding="async" width="1600" height="1200">
-        </div>
-      </div>
-    </section>
-
-    <section class="section" style="padding-top: 0;">
-      <div class="container split reverse">
-        <div class="split-media">
-          <img src="assets/full/dji-fly-20250504-182026.jpg" alt="Hilltop village surrounded by rolling green countryside, photographed from the air" loading="lazy" decoding="async" width="1600" height="1200">
-        </div>
-        <div>
-          <span class="kicker">Services</span>
-          <h2>Aerial photography &amp; videography</h2>
-          <p class="lede">My services include aerial photography and videography for various industries. From stunning automotive shots to mesmerizing nature landscapes, I have the expertise to capture the beauty from above.</p>
-          <ul class="services-points">
-            <li><strong>Automotive</strong> — hero shots, top-downs, and collection coverage</li>
-            <li><strong>Nature &amp; landscape</strong> — mountains, coastlines, and remote terrain</li>
-            <li><strong>Video</strong> — cinematic aerial footage alongside stills</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" style="padding-top: 0;">
+    <!-- ================= STATEMENT ================= -->
+    <section class="statement">
       <div class="container">
-        <span class="kicker">Selected Work</span>
-        <h2>A glimpse from above</h2>
-        <div class="mosaic">
-          <a href="gallery.html" class="wide">
-            <img src="assets/thumb/dji-fly-20250421-184918.jpg" alt="Aerial of Varenna's lakeside village jutting into Lake Como" loading="lazy" decoding="async" width="480" height="360">
-          </a>
-          <a href="gallery.html" class="tall">
-            <img src="assets/thumb/max-0727.jpg" alt="Top-down aerial view of a Gulf-livery Ford GT40, light blue with an orange stripe" loading="lazy" decoding="async" width="480" height="331">
-          </a>
-          <a href="gallery.html">
-            <img src="assets/thumb/dji-0189.jpg" alt="Aerial view of the Arno River and Ponte Vecchio winding through Florence at dusk" loading="lazy" decoding="async" width="480" height="360">
-          </a>
-          <a href="gallery.html">
-            <img src="assets/thumb/img-6723.jpg" alt="Yosemite Valley from Tunnel View with El Capitan and Bridalveil Fall" loading="lazy" decoding="async" width="480" height="360">
-          </a>
-          <a href="gallery.html">
-            <img src="assets/thumb/max-0091.jpg" alt="Aerial view over the brink of Skógafoss waterfall in Iceland" loading="lazy" decoding="async" width="480" height="270">
-          </a>
-          <a href="gallery.html">
-            <img src="assets/thumb/dji-0324.jpg" alt="The Matterhorn above snow-covered glaciers and drifting clouds" loading="lazy" decoding="async" width="480" height="360">
-          </a>
-          <a href="gallery.html" class="wide">
-            <img src="assets/thumb/dji-fly-20250425-061228.jpg" alt="Dawn aerial over Rome with the Colosseum rising from the city" loading="lazy" decoding="async" width="480" height="360">
-          </a>
-        </div>
-        <div class="section-cta">
-          <a class="btn btn-primary" href="gallery.html">View the Full Gallery</a>
+        <p class="statement-text">Some perspectives can't be reached on foot. I fly for the frame most people never see — the top-down, the slow reveal, <em>the golden hour from four hundred feet.</em></p>
+        <div class="statement-foot" data-reveal>
+          <span>Automotive</span>
+          <span>Nature &amp; Landscape</span>
+          <span>Cinematic Video</span>
         </div>
       </div>
     </section>
 
-    <section class="section cta-band">
+    <!-- ================= DEPTH (3D fly-through) ================= -->
+    <section class="depth" id="work" aria-label="A fly-through of selected photographs">
+      <div class="depth-stage">
+        <figure class="depth-layer" style="--x:22%; --y:34%; --w:26vw"><img src="assets/full/dji-fly-20250421-180026.jpg" alt="Wooded promontory and villa gardens on the deep blue water of Lake Como, from above" loading="lazy" decoding="async" width="1600" height="1200"><figcaption>Lake Como</figcaption></figure>
+        <figure class="depth-layer" style="--x:76%; --y:28%; --w:24vw"><img src="assets/full/img-6965.jpg" alt="Looking down into Yosemite Valley from a granite ledge" loading="lazy" decoding="async" width="1600" height="1200"><figcaption>Yosemite</figcaption></figure>
+        <figure class="depth-layer" style="--x:30%; --y:74%; --w:28vw"><img src="assets/full/dji-0192.jpg" alt="Sunset aerial over the rooftops of Florence with the Duomo on the skyline" loading="lazy" decoding="async" width="1600" height="1200"><figcaption>Florence</figcaption></figure>
+        <figure class="depth-layer" style="--x:72%; --y:72%; --w:26vw"><img src="assets/full/max-0128.jpg" alt="Braided glacial river threading a mossy green canyon in the Icelandic highlands" loading="lazy" decoding="async" width="1600" height="900"><figcaption>Iceland</figcaption></figure>
+        <figure class="depth-layer" style="--x:50%; --y:18%; --w:22vw"><img src="assets/full/dji-fly-20250509-161234.jpg" alt="Jagged Dolomite peaks wrapped in cloud, seen from drone altitude" loading="lazy" decoding="async" width="1600" height="1200"><figcaption>Dolomites</figcaption></figure>
+        <figure class="depth-layer" style="--x:14%; --y:56%; --w:22vw"><img src="assets/full/aerial-2022-04.jpg" alt="Aerial of a beach-town shoreline under a golden sunset" loading="lazy" decoding="async" width="1600" height="1200"><figcaption>Coast</figcaption></figure>
+        <figure class="depth-layer" style="--x:86%; --y:52%; --w:24vw"><img src="assets/full/max-0724.jpg" alt="Gulf-livery Ford GT40 photographed from above in an industrial lot" loading="lazy" decoding="async" width="1600" height="1001"><figcaption>Gulf GT40</figcaption></figure>
+      </div>
+      <div class="depth-vignette" aria-hidden="true"></div>
+      <div class="depth-title">
+        <span class="kicker center">Selected work</span>
+        <h2>Fly through <span class="display-i">the frames</span></h2>
+        <p class="lede">Lake Como to Yosemite, Florence to the Icelandic highlands. Keep scrolling.</p>
+      </div>
+    </section>
+
+    <!-- ================= FILMSTRIP (horizontal travel) ================= -->
+    <section class="filmstrip" id="reel">
+      <div class="container filmstrip-head">
+        <div>
+          <span class="kicker">The reel</span>
+          <h2>Eight frames, <span class="display-i">one pass</span></h2>
+        </div>
+        <p class="lede">A cross-section of the portfolio. Scroll to travel the strip.</p>
+      </div>
+      <div class="filmstrip-viewport">
+        <div class="filmstrip-track">
+          <div class="frame frame-text">
+            <span class="kicker">01 — 08</span>
+            <h3>Automotive, alpine, coastal and wild, in the order they were shot.</h3>
+            <p class="lede">Each frame opens full size in the gallery.</p>
+          </div>
+          <a class="frame" href="gallery.html" style="--r:1.452"><img src="assets/full/max-0727.jpg" alt="Top-down aerial view of a Gulf-livery Ford GT40, light blue with an orange stripe" loading="lazy" decoding="async" width="1600" height="1102"><span class="frame-meta"><span>Gulf GT40 · Top-down</span><span class="n">01</span></span></a>
+          <a class="frame" href="gallery.html" style="--r:1.333"><img src="assets/full/dji-fly-20250421-184918.jpg" alt="Aerial of Varenna's lakeside village jutting into Lake Como" loading="lazy" decoding="async" width="1600" height="1200"><span class="frame-meta"><span>Varenna · Lake Como</span><span class="n">02</span></span></a>
+          <a class="frame" href="gallery.html" style="--r:1.333"><img src="assets/full/dji-0189.jpg" alt="Aerial view of the Arno River and Ponte Vecchio winding through Florence at dusk" loading="lazy" decoding="async" width="1600" height="1200"><span class="frame-meta"><span>Ponte Vecchio · Florence</span><span class="n">03</span></span></a>
+          <a class="frame" href="gallery.html" style="--r:1.333"><img src="assets/full/dji-0324.jpg" alt="The Matterhorn above snow-covered glaciers and drifting clouds" loading="lazy" decoding="async" width="1600" height="1200"><span class="frame-meta"><span>Matterhorn</span><span class="n">04</span></span></a>
+          <a class="frame" href="gallery.html" style="--r:1.778"><img src="assets/full/max-0091.jpg" alt="Aerial view over the brink of Skogafoss waterfall in Iceland" loading="lazy" decoding="async" width="1600" height="900"><span class="frame-meta"><span>Skógafoss · Iceland</span><span class="n">05</span></span></a>
+          <a class="frame" href="gallery.html" style="--r:1.333"><img src="assets/full/img-6723.jpg" alt="Yosemite Valley from Tunnel View with El Capitan and Bridalveil Fall" loading="lazy" decoding="async" width="1600" height="1200"><span class="frame-meta"><span>Tunnel View · Yosemite</span><span class="n">06</span></span></a>
+          <a class="frame" href="gallery.html" style="--r:1.333"><img src="assets/full/max-0174.jpg" alt="Ship steaming up a still Icelandic fjord between dark mountains at dusk" loading="lazy" decoding="async" width="1600" height="1200"><span class="frame-meta"><span>Fjord · Iceland</span><span class="n">07</span></span></a>
+          <a class="frame" href="gallery.html" style="--r:1.778"><img src="assets/full/img-8860.jpg" alt="Wildebeest herd crossing a river during the Great Migration" loading="lazy" decoding="async" width="1600" height="900"><span class="frame-meta"><span>Great Migration</span><span class="n">08</span></span></a>
+        </div>
+        <div class="filmstrip-foot container" aria-hidden="true">
+          <span>Reel</span>
+          <span class="filmstrip-bar"><i></i></span>
+          <span>Gallery →</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CHAPTERS (sticky media) ================= -->
+    <section class="section" id="chapters">
+      <div class="container chapters">
+        <div class="chapters-media" aria-hidden="true">
+          <img src="assets/full/aerial-2022-02.jpg" alt="" class="is-active" data-chapter="0" loading="lazy" decoding="async" width="1600" height="1200">
+          <img src="assets/full/dji-fly-20250425-061228.jpg" alt="" data-chapter="1" loading="lazy" decoding="async" width="1600" height="1200">
+          <img src="assets/full/dji-fly-20240601-160248.jpg" alt="" data-chapter="2" loading="lazy" decoding="async" width="1600" height="1200">
+          <img src="assets/full/img-8413.jpg" alt="" data-chapter="3" loading="lazy" decoding="async" width="1600" height="1200">
+          <span class="ch-label"><b class="ch-num">01</b><span class="ch-name">Automotive</span></span>
+        </div>
+        <div class="chapters-copy">
+          <article class="chapter" data-index="0" data-name="Automotive">
+            <div class="num">01</div>
+            <span class="kicker">Automotive</span>
+            <h2>Cars look different from above</h2>
+            <p class="lede">Hero shots, top-downs and collection coverage. A GT40 in Gulf livery reads like a graphic from 40 feet up; a warehouse of air-cooled Porsches becomes a pattern. I plan the light, the angle and the line so the car is the whole story.</p>
+            <ul>
+              <li>Top-down and orbit stills</li>
+              <li>Collection and dealer coverage</li>
+              <li>Rolling and static video</li>
+            </ul>
+          </article>
+          <article class="chapter" data-index="1" data-name="Cities">
+            <div class="num">02</div>
+            <span class="kicker">Cities</span>
+            <h2>Old cities at first light</h2>
+            <p class="lede">Rome before the streets wake up. Florence as the sun drops behind the Duomo. Tuscan hill towns in soft morning haze. Cities from altitude turn into geometry, and the best hour is always the quiet one.</p>
+          </article>
+          <article class="chapter" data-index="2" data-name="Alpine">
+            <div class="num">03</div>
+            <span class="kicker">Alpine</span>
+            <h2>Mountains, at eye level</h2>
+            <p class="lede">The Matterhorn above a sea of glacier and cloud. The Dolomites wrapped in weather. Yosemite from a granite ledge. Altitude puts you level with the peaks instead of underneath them, and the scale finally makes sense.</p>
+          </article>
+          <article class="chapter" data-index="3" data-name="Wild">
+            <div class="num">04</div>
+            <span class="kicker">Wild</span>
+            <h2>Waterfalls, black sand, and the migration</h2>
+            <p class="lede">Iceland's braided rivers and the brink of Skógafoss. Black-sand surf on the south coast. Elephants stepping out of the brush and a wildebeest crossing on safari. The work that pushes furthest from home.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SERVICES ================= -->
+    <section class="section" id="services" style="padding-top: 0;">
       <div class="container">
-        <h2>Have a shoot in mind?</h2>
-        <p class="lede">Tell me about your car, your location, or your idea — and let's capture it from a perspective most people never see. Follow along on <a href="https://www.instagram.com/aerialcapturephotography/" target="_blank" rel="noopener">Instagram</a> for the latest work.</p>
-        <a class="btn btn-primary" href="contact.html">Contact Me</a>
+        <div class="services-head">
+          <div>
+            <span class="kicker">Services</span>
+            <h2 class="lines"><span class="line"><span>What I <span class="display-i">shoot</span></span></span></h2>
+          </div>
+          <p class="lede" data-reveal>Aerial photography and videography for automotive, landscape and travel. From a single hero image to a full cinematic edit, the deliverable is built around what you need the footage to do.</p>
+        </div>
+        <ol class="svc-list">
+          <li class="svc" data-reveal>
+            <span class="n">01</span>
+            <h3>Automotive</h3>
+            <p>Hero stills, top-downs, orbit and reveal shots for owners, collectors and dealers. Location scouting included.</p>
+            <span class="svc-img"><img src="assets/thumb/max-0727.jpg" alt="" loading="lazy" decoding="async" width="480" height="331"></span>
+          </li>
+          <li class="svc" data-reveal>
+            <span class="n">02</span>
+            <h3>Nature &amp; landscape</h3>
+            <p>Mountains, coastlines and remote terrain. Editorial-grade stills for prints, campaigns and destination work.</p>
+            <span class="svc-img"><img src="assets/thumb/dji-fly-20250504-104716.jpg" alt="" loading="lazy" decoding="async" width="480" height="360"></span>
+          </li>
+          <li class="svc" data-reveal>
+            <span class="n">03</span>
+            <h3>Cinematic video</h3>
+            <p>Smooth 4K aerial footage alongside the stills. Slow reveals, tracking shots and establishing sequences, graded and delivered ready to cut.</p>
+            <span class="svc-img"><img src="assets/thumb/dji-fly-20250824-131454.jpg" alt="" loading="lazy" decoding="async" width="480" height="360"></span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= MARQUEE ================= -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Lake Como<i>·</i></span><span>Florence<i>·</i></span><span>Rome<i>·</i></span><span>Zermatt<i>·</i></span><span>Dolomites<i>·</i></span><span>Yosemite<i>·</i></span><span>Sierra Nevada<i>·</i></span><span>Iceland<i>·</i></span><span>The Great Migration<i>·</i></span><span>Gulf GT40<i>·</i></span>
+        <span>Lake Como<i>·</i></span><span>Florence<i>·</i></span><span>Rome<i>·</i></span><span>Zermatt<i>·</i></span><span>Dolomites<i>·</i></span><span>Yosemite<i>·</i></span><span>Sierra Nevada<i>·</i></span><span>Iceland<i>·</i></span><span>The Great Migration<i>·</i></span><span>Gulf GT40<i>·</i></span>
+      </div>
+    </div>
+
+    <!-- ================= CTA ================= -->
+    <section class="section cta-band" id="contact">
+      <div class="container">
+        <span class="kicker center" data-reveal="fade">Let's talk</span>
+        <h2 class="lines"><span class="line"><span>Have a shoot <span class="display-i">in mind?</span></span></span></h2>
+        <p class="lede" data-reveal>Tell me about your car, your location, or your idea, and let's capture it from a perspective most people never see. Follow along on <a href="https://www.instagram.com/aerialcapturephotography/" target="_blank" rel="noopener">Instagram</a> for the latest work.</p>
+        <a class="btn btn-primary" href="contact.html" data-reveal data-delay="1">Contact me <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
       </div>
     </section>
   </main>
@@ -149,9 +259,9 @@
       <div class="footer-grid">
         <div>
           <a class="footer-brand" href="index.html">
-            <img src="assets/logo-stacked.png" alt="Aerial Capture Photography" width="142" height="118">
+            <img src="assets/logo-stacked.png" alt="Aerial Capture Photography" width="133" height="110" loading="lazy">
           </a>
-          <p class="footer-tag">Drone photography and videography — automotive and nature, captured from the skies.</p>
+          <p class="footer-tag">Drone photography and videography. Automotive and nature, captured from the skies.</p>
         </div>
         <nav class="footer-nav" aria-label="Footer">
           <h3>Explore</h3>
@@ -168,12 +278,16 @@
           <a href="https://www.instagram.com/aerialcapturephotography/" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
+      <div class="footer-big" aria-hidden="true">Aerial Capture</div>
       <div class="footer-bottom">
         <span>&copy; 2026 Aerial Capture Photography. All rights reserved.</span>
+        <span>Shot from above.</span>
       </div>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

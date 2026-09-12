@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gallery | Aerial Capture Photography</title>
-  <meta name="description" content="Forty frames from above — classic Porsches and a Gulf GT40, Florence and Lake Como, the Alps, Yosemite, Iceland, and safari wildlife, all captured by drone and camera.">
+  <meta name="description" content="Forty-six frames from above — classic Porsches and a Gulf GT40, Florence and Lake Como, the Alps, Yosemite, Iceland, and safari wildlife, all captured by drone and camera.">
   <link rel="canonical" href="https://aerialcapturephotography.com/gallery.html">
+  <meta name="theme-color" content="#05080D">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Gallery | Aerial Capture Photography">
-  <meta property="og:description" content="Forty frames from above — automotive, alpine, coastal, and wildlife photography by drone and camera.">
+  <meta property="og:description" content="Forty-six frames from above — automotive, alpine, coastal, and wildlife photography by drone and camera.">
   <meta property="og:image" content="https://aerialcapturephotography.com/assets/full/dji-fly-20250421-184918.jpg">
   <meta property="og:url" content="https://aerialcapturephotography.com/gallery.html">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -16,17 +17,20 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="is-loaded">
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" data-label="View" aria-hidden="true"></div>
 
-  <header class="site-header scrolled">
+  <header class="site-header solid">
     <div class="container header-inner">
       <a class="brand" href="index.html">
-        <img src="assets/logo.png" alt="" width="32" height="42">
-        Aerial Capture Photography
+        <img src="assets/logo.png" alt="" width="29" height="38">
+        <span class="brand-text">Aerial Capture Photography<small>Drone · Automotive · Nature</small></span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
@@ -38,151 +42,231 @@
           <li><a href="gallery.html" aria-current="page">Gallery</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
+        <p class="nav-cta">Have a shoot in mind? <a href="mailto:aerialcapturephotography@gmail.com">aerialcapturephotography@gmail.com</a></p>
       </nav>
     </div>
   </header>
 
   <main id="main">
     <section class="page-hero">
-      <div class="container">
-        <span class="kicker">Portfolio</span>
-        <h1>Gallery</h1>
-        <p class="lede">Forty frames from above — automotive, alpine, coastal, and wild. Click any photo to view it full size.</p>
+      <div class="container page-hero-grid">
+        <div>
+          <span class="kicker" data-reveal="fade">Portfolio</span>
+          <h1 class="lines"><span class="line"><span>The</span></span><span class="line"><span class="display-i">gallery</span></span></h1>
+          <p class="lede" data-reveal data-delay="2">Automotive, alpine, coastal, and wild. Filter by world, or open any frame full size.</p>
+        </div>
+        <div class="count" data-reveal="fade" data-delay="3"><span class="gallery-total">46</span><small>frames from above</small></div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" style="padding-top: clamp(2.5rem, 5vw, 4rem);">
       <div class="container">
+        <ul class="filters" aria-label="Filter photos">
+          <li><button type="button" data-filter="all" aria-pressed="true">All<small></small></button></li>
+          <li><button type="button" data-filter="automotive" aria-pressed="false">Automotive<small></small></button></li>
+          <li><button type="button" data-filter="cities" aria-pressed="false">Cities<small></small></button></li>
+          <li><button type="button" data-filter="alpine" aria-pressed="false">Alpine<small></small></button></li>
+          <li><button type="button" data-filter="coast" aria-pressed="false">Coast &amp; Lakes<small></small></button></li>
+          <li><button type="button" data-filter="wild" aria-pressed="false">Wild<small></small></button></li>
+        </ul>
         <div class="gallery-grid">
-          <a href="assets/full/aerial-2022-01.jpg" data-lightbox>
+          <!-- GALLERY:START -->
+          <a class="ph" href="assets/full/aerial-2022-01.jpg" data-lightbox data-cat="automotive" data-place="Studio garage" style="--r:1.3333">
             <img src="assets/thumb/aerial-2022-01.jpg" alt="Two silver vintage Porsches, a 914 and a 356, staged in a bright studio garage" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">01</span><span class="ph-place">Studio garage</span></span>
           </a>
-          <a href="assets/full/aerial-2022-03.jpg" data-lightbox>
+          <a class="ph" href="assets/full/aerial-2022-03.jpg" data-lightbox data-cat="automotive" data-place="Private collection" style="--r:1.3333">
             <img src="assets/thumb/aerial-2022-03.jpg" alt="Private collection of classic Porsche 911s and 914s parked in a warehouse studio" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">02</span><span class="ph-place">Private collection</span></span>
           </a>
-          <a href="assets/full/max-0727.jpg" data-lightbox>
-            <img src="assets/thumb/max-0727.jpg" alt="Top-down aerial view of a Gulf-livery Ford GT40, light blue with an orange stripe" loading="lazy" decoding="async" width="480" height="331">
+          <a class="ph" href="assets/full/aerial-2022-02.jpg" data-lightbox data-cat="automotive" data-place="Private collection" style="--r:1.3333">
+            <img src="assets/thumb/aerial-2022-02.jpg" alt="Garage full of classic Porsches, with a yellow racing-livery 911 up front" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">03</span><span class="ph-place">Private collection</span></span>
           </a>
-          <a href="assets/full/dji-0189.jpg" data-lightbox>
+          <a class="ph" href="assets/full/max-0727.jpg" data-lightbox data-cat="automotive" data-place="Gulf GT40" style="--r:1.4519">
+            <img src="assets/thumb/max-0727.jpg" alt="Top-down aerial view of a Gulf-livery Ford GT40, light blue with an orange stripe" width="480" height="331">
+            <span class="ph-meta"><span class="ph-num">04</span><span class="ph-place">Gulf GT40</span></span>
+          </a>
+          <a class="ph" href="assets/full/max-0724.jpg" data-lightbox data-cat="automotive" data-place="Gulf GT40" style="--r:1.5984">
+            <img src="assets/thumb/max-0724.jpg" alt="Gulf-livery Ford GT40 photographed from above in an industrial lot" width="480" height="300">
+            <span class="ph-meta"><span class="ph-num">05</span><span class="ph-place">Gulf GT40</span></span>
+          </a>
+          <a class="ph" href="assets/full/img-9701.jpg" data-lightbox data-cat="automotive" data-place="Hypercar showcase" style="--r:1.8307">
+            <img src="assets/thumb/img-9701.jpg" alt="Visitors gathered around hypercars on display at an automotive showcase" width="480" height="262">
+            <span class="ph-meta"><span class="ph-num">06</span><span class="ph-place">Hypercar showcase</span></span>
+          </a>
+          <a class="ph" href="assets/full/dji-0189.jpg" data-lightbox data-cat="cities" data-place="Florence" style="--r:1.3333">
             <img src="assets/thumb/dji-0189.jpg" alt="Aerial view of the Arno River and Ponte Vecchio winding through Florence at dusk" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">07</span><span class="ph-place">Florence</span></span>
           </a>
-          <a href="assets/full/dji-0192.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-0192.jpg" data-lightbox data-cat="cities" data-place="Florence" style="--r:1.3333">
             <img src="assets/thumb/dji-0192.jpg" alt="Sunset aerial over the rooftops of Florence with the Duomo on the skyline" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">08</span><span class="ph-place">Florence</span></span>
           </a>
-          <a href="assets/full/dji-0181.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-0181.jpg" data-lightbox data-cat="cities" data-place="Florence" style="--r:1.3333">
             <img src="assets/thumb/dji-0181.jpg" alt="Aerial of the Basilica of Santa Croce and the Florence cityscape in evening light" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">09</span><span class="ph-place">Florence</span></span>
           </a>
-          <a href="assets/full/dji-fly-20250425-061228.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-fly-20250425-061228.jpg" data-lightbox data-cat="cities" data-place="Rome" style="--r:1.3333">
             <img src="assets/thumb/dji-fly-20250425-061228.jpg" alt="Dawn aerial over Rome with the Colosseum rising from the city" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">10</span><span class="ph-place">Rome</span></span>
           </a>
-          <a href="assets/full/dji-fly-20250421-180026.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-fly-20250421-180026.jpg" data-lightbox data-cat="coast" data-place="Lake Como" style="--r:1.3333">
             <img src="assets/thumb/dji-fly-20250421-180026.jpg" alt="Wooded promontory and villa gardens on the deep blue water of Lake Como, from above" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">11</span><span class="ph-place">Lake Como</span></span>
           </a>
-          <a href="assets/full/dji-fly-20250421-184918.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-fly-20250421-184918.jpg" data-lightbox data-cat="coast" data-place="Varenna, Lake Como" style="--r:1.3333">
             <img src="assets/thumb/dji-fly-20250421-184918.jpg" alt="Aerial of Varenna's lakeside village jutting into Lake Como" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">12</span><span class="ph-place">Varenna, Lake Como</span></span>
           </a>
-          <a href="assets/full/dji-fly-20240531-211510.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-fly-20240531-211510.jpg" data-lightbox data-cat="coast" data-place="Alpine lake" style="--r:1.3333">
             <img src="assets/thumb/dji-fly-20240531-211510.jpg" alt="Boat crossing a dark alpine lake at dusk, mountains fading into the haze" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">13</span><span class="ph-place">Alpine lake</span></span>
           </a>
-          <a href="assets/full/dji-fly-20250504-104716.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-fly-20250504-104716.jpg" data-lightbox data-cat="cities" data-place="Tuscany" style="--r:1.3333">
             <img src="assets/thumb/dji-fly-20250504-104716.jpg" alt="Aerial of a medieval Italian hill town and its cathedral in soft morning light" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">14</span><span class="ph-place">Tuscany</span></span>
           </a>
-          <a href="assets/full/dji-fly-20250504-182026.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-fly-20250504-182026.jpg" data-lightbox data-cat="cities" data-place="Tuscany" style="--r:1.3333">
             <img src="assets/thumb/dji-fly-20250504-182026.jpg" alt="Hilltop village surrounded by rolling green countryside, photographed from the air" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">15</span><span class="ph-place">Tuscany</span></span>
           </a>
-          <a href="assets/full/dji-fly-20250505-072656.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-fly-20250505-072656.jpg" data-lightbox data-cat="alpine" data-place="Countryside" style="--r:1.3333">
             <img src="assets/thumb/dji-fly-20250505-072656.jpg" alt="Vivid green farm fields rolling to the horizon under scattered clouds" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">16</span><span class="ph-place">Countryside</span></span>
           </a>
-          <a href="assets/full/dji-fly-20250509-161234.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-fly-20250509-161234.jpg" data-lightbox data-cat="alpine" data-place="Dolomites" style="--r:1.3333">
             <img src="assets/thumb/dji-fly-20250509-161234.jpg" alt="Jagged Dolomite peaks wrapped in cloud, seen from drone altitude" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">17</span><span class="ph-place">Dolomites</span></span>
           </a>
-          <a href="assets/full/dji-0324.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-0324.jpg" data-lightbox data-cat="alpine" data-place="Matterhorn" style="--r:1.3333">
             <img src="assets/thumb/dji-0324.jpg" alt="The Matterhorn above snow-covered glaciers and drifting clouds" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">18</span><span class="ph-place">Matterhorn</span></span>
           </a>
-          <a href="assets/full/dji-0329.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-0329.jpg" data-lightbox data-cat="alpine" data-place="Swiss Alps" style="--r:1.3333">
             <img src="assets/thumb/dji-0329.jpg" alt="Snowbound alpine ridge with a mountain road carved across it" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">19</span><span class="ph-place">Swiss Alps</span></span>
           </a>
-          <a href="assets/full/dji-fly-20240601-160248.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-fly-20240601-160248.jpg" data-lightbox data-cat="alpine" data-place="Zermatt" style="--r:1.3333">
             <img src="assets/thumb/dji-fly-20240601-160248.jpg" alt="The village of Zermatt from above with the Matterhorn towering behind" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">20</span><span class="ph-place">Zermatt</span></span>
           </a>
-          <a href="assets/full/dji-fly-20250515-110204.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-fly-20250515-110204.jpg" data-lightbox data-cat="alpine" data-place="Alps" style="--r:1.3333">
             <img src="assets/thumb/dji-fly-20250515-110204.jpg" alt="Two hikers on a rocky overlook above a sweeping green alpine valley" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">21</span><span class="ph-place">Alps</span></span>
           </a>
-          <a href="assets/full/dji-fly-20250514-102446.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-fly-20250514-102446.jpg" data-lightbox data-cat="alpine" data-place="Alps" style="--r:1.3333">
             <img src="assets/thumb/dji-fly-20250514-102446.jpg" alt="Forested alpine valley climbing toward bare granite peaks" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">22</span><span class="ph-place">Alps</span></span>
           </a>
-          <a href="assets/full/img-6723.jpg" data-lightbox>
+          <a class="ph" href="assets/full/img-6723.jpg" data-lightbox data-cat="alpine" data-place="Yosemite" style="--r:1.3333">
             <img src="assets/thumb/img-6723.jpg" alt="Yosemite Valley from Tunnel View with El Capitan and Bridalveil Fall" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">23</span><span class="ph-place">Yosemite</span></span>
           </a>
-          <a href="assets/full/img-6939.jpg" data-lightbox>
+          <a class="ph" href="assets/full/img-6939.jpg" data-lightbox data-cat="alpine" data-place="Yosemite" style="--r:1.3333">
             <img src="assets/thumb/img-6939.jpg" alt="Yosemite Falls dropping to a green valley meadow" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">24</span><span class="ph-place">Yosemite</span></span>
           </a>
-          <a href="assets/full/img-6823.jpg" data-lightbox>
+          <a class="ph" href="assets/full/img-6823.jpg" data-lightbox data-cat="alpine" data-place="Yosemite" style="--r:1.3333">
             <img src="assets/thumb/img-6823.jpg" alt="Half Dome catching the last warm light of sunset above dark pines" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">25</span><span class="ph-place">Yosemite</span></span>
           </a>
-          <a href="assets/full/img-6952.jpg" data-lightbox>
+          <a class="ph" href="assets/full/img-6952.jpg" data-lightbox data-cat="alpine" data-place="Yosemite" style="--r:1.3333">
             <img src="assets/thumb/img-6952.jpg" alt="Half Dome in the distance under a dramatic sky of storm clouds" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">26</span><span class="ph-place">Yosemite</span></span>
           </a>
-          <a href="assets/full/img-6965.jpg" data-lightbox>
+          <a class="ph" href="assets/full/img-6965.jpg" data-lightbox data-cat="alpine" data-place="Yosemite" style="--r:1.3333">
             <img src="assets/thumb/img-6965.jpg" alt="Looking down into Yosemite Valley from a granite ledge" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">27</span><span class="ph-place">Yosemite</span></span>
           </a>
-          <a href="assets/full/img-7088.jpg" data-lightbox>
+          <a class="ph" href="assets/full/img-7088.jpg" data-lightbox data-cat="alpine" data-place="Mirror Lake" style="--r:1.3333">
             <img src="assets/thumb/img-7088.jpg" alt="Granite cliffs mirrored in the still water of Mirror Lake, Yosemite" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">28</span><span class="ph-place">Mirror Lake</span></span>
           </a>
-          <a href="assets/full/img-7348.jpg" data-lightbox>
+          <a class="ph" href="assets/full/img-7348.jpg" data-lightbox data-cat="alpine" data-place="Sierra Nevada" style="--r:1.3333">
             <img src="assets/thumb/img-7348.jpg" alt="High-country trail winding through Sierra granite, a dog trotting ahead" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">29</span><span class="ph-place">Sierra Nevada</span></span>
           </a>
-          <a href="assets/full/img-7624.jpg" data-lightbox>
+          <a class="ph" href="assets/full/img-7624.jpg" data-lightbox data-cat="alpine" data-place="Sierra Nevada" style="--r:1.3333">
             <img src="assets/thumb/img-7624.jpg" alt="Alpine lake set in a granite basin high in the Sierra Nevada" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">30</span><span class="ph-place">Sierra Nevada</span></span>
           </a>
-          <a href="assets/full/img-6858.jpg" data-lightbox>
+          <a class="ph" href="assets/full/img-6858.jpg" data-lightbox data-cat="alpine" data-place="Sierra Nevada" style="--r:1.3333">
             <img src="assets/thumb/img-6858.jpg" alt="Fiery sunset sky over a boulder-strewn mountain creek" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">31</span><span class="ph-place">Sierra Nevada</span></span>
           </a>
-          <a href="assets/full/max-0080.jpg" data-lightbox>
+          <a class="ph" href="assets/full/img-8131.jpg" data-lightbox data-cat="alpine" data-place="Summit" style="--r:1.3333">
+            <img src="assets/thumb/img-8131.jpg" alt="A mountain's shadow cast across a sea of clouds at dusk, seen from the summit" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">32</span><span class="ph-place">Summit</span></span>
+          </a>
+          <a class="ph" href="assets/full/max-0080.jpg" data-lightbox data-cat="wild" data-place="Iceland" style="--r:1.7778">
             <img src="assets/thumb/max-0080.jpg" alt="Waterfalls spilling over mossy green cliffs in Iceland" loading="lazy" decoding="async" width="480" height="270">
+            <span class="ph-meta"><span class="ph-num">33</span><span class="ph-place">Iceland</span></span>
           </a>
-          <a href="assets/full/max-0091.jpg" data-lightbox>
-            <img src="assets/thumb/max-0091.jpg" alt="Aerial view over the brink of Skógafoss waterfall in Iceland" loading="lazy" decoding="async" width="480" height="270">
+          <a class="ph" href="assets/full/max-0091.jpg" data-lightbox data-cat="wild" data-place="Skogafoss, Iceland" style="--r:1.7778">
+            <img src="assets/thumb/max-0091.jpg" alt="Aerial view over the brink of Skogafoss waterfall in Iceland" loading="lazy" decoding="async" width="480" height="270">
+            <span class="ph-meta"><span class="ph-num">34</span><span class="ph-place">Skogafoss, Iceland</span></span>
           </a>
-          <a href="assets/full/max-0150.jpg" data-lightbox>
+          <a class="ph" href="assets/full/max-0128.jpg" data-lightbox data-cat="wild" data-place="Icelandic highlands" style="--r:1.7778">
+            <img src="assets/thumb/max-0128.jpg" alt="Braided glacial river threading a mossy green canyon in the Icelandic highlands" loading="lazy" decoding="async" width="480" height="270">
+            <span class="ph-meta"><span class="ph-num">35</span><span class="ph-place">Icelandic highlands</span></span>
+          </a>
+          <a class="ph" href="assets/full/max-0150.jpg" data-lightbox data-cat="coast" data-place="Iceland south coast" style="--r:1.3333">
             <img src="assets/thumb/max-0150.jpg" alt="Waves washing a black-sand beach on Iceland's south coast, from above" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">36</span><span class="ph-place">Iceland south coast</span></span>
           </a>
-          <a href="assets/full/max-0174.jpg" data-lightbox>
+          <a class="ph" href="assets/full/max-0174.jpg" data-lightbox data-cat="coast" data-place="Icelandic fjord" style="--r:1.3333">
             <img src="assets/thumb/max-0174.jpg" alt="Ship steaming up a still Icelandic fjord between dark mountains at dusk" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">37</span><span class="ph-place">Icelandic fjord</span></span>
           </a>
-          <a href="assets/full/img-8413.jpg" data-lightbox>
+          <a class="ph" href="assets/full/max-0136.jpg" data-lightbox data-cat="wild" data-place="Vineyard estate" style="--r:1.3333">
+            <img src="assets/thumb/max-0136.jpg" alt="Aerial view of a vineyard estate with solar-roofed buildings among the vines" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">38</span><span class="ph-place">Vineyard estate</span></span>
+          </a>
+          <a class="ph" href="assets/full/img-8413.jpg" data-lightbox data-cat="wild" data-place="Safari" style="--r:1.3333">
             <img src="assets/thumb/img-8413.jpg" alt="African elephant stepping out of the brush on safari" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">39</span><span class="ph-place">Safari</span></span>
           </a>
-          <a href="assets/full/img-8860.jpg" data-lightbox>
+          <a class="ph" href="assets/full/img-8860.jpg" data-lightbox data-cat="wild" data-place="Great Migration" style="--r:1.7778">
             <img src="assets/thumb/img-8860.jpg" alt="Wildebeest herd crossing a river during the Great Migration" loading="lazy" decoding="async" width="480" height="270">
+            <span class="ph-meta"><span class="ph-num">40</span><span class="ph-place">Great Migration</span></span>
           </a>
-          <a href="assets/full/aerial-2022-04.jpg" data-lightbox>
+          <a class="ph" href="assets/full/aerial-2022-04.jpg" data-lightbox data-cat="coast" data-place="Beach town" style="--r:1.3333">
             <img src="assets/thumb/aerial-2022-04.jpg" alt="Aerial of a beach-town shoreline under a golden sunset" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">41</span><span class="ph-place">Beach town</span></span>
           </a>
-          <a href="assets/full/max-0008.jpg" data-lightbox>
+          <a class="ph" href="assets/full/max-0008.jpg" data-lightbox data-cat="wild" data-place="Desert" style="--r:1.3333">
             <img src="assets/thumb/max-0008.jpg" alt="Red-rock ridgeline rising from desert scrub under a clear sky" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">42</span><span class="ph-place">Desert</span></span>
           </a>
-          <a href="assets/full/dji-fly-20250319-150534.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-fly-20250319-150534.jpg" data-lightbox data-cat="wild" data-place="Canyon" style="--r:1.3333">
             <img src="assets/thumb/dji-fly-20250319-150534.jpg" alt="Waterfall tumbling through a rugged green canyon with birds circling overhead" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">43</span><span class="ph-place">Canyon</span></span>
           </a>
-          <a href="assets/full/dji-fly-20250824-131454.jpg" data-lightbox>
+          <a class="ph" href="assets/full/dji-fly-20250824-131454.jpg" data-lightbox data-cat="coast" data-place="Mountain lake" style="--r:1.3333">
             <img src="assets/thumb/dji-fly-20250824-131454.jpg" alt="Boat carving a white wake across a mountain lake, surfer in tow" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">44</span><span class="ph-place">Mountain lake</span></span>
           </a>
-          <a href="assets/full/img-7897.jpg" data-lightbox>
+          <a class="ph" href="assets/full/img-7897.jpg" data-lightbox data-cat="coast" data-place="Ridgeline" style="--r:1.3333">
             <img src="assets/thumb/img-7897.jpg" alt="Burnt-orange sunset over a dark ridgeline and distant water" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">45</span><span class="ph-place">Ridgeline</span></span>
           </a>
-          <a href="assets/full/img-9798.jpg" data-lightbox>
+          <a class="ph" href="assets/full/img-9798.jpg" data-lightbox data-cat="coast" data-place="Pacific" style="--r:1.3333">
             <img src="assets/thumb/img-9798.jpg" alt="Setting sun sinking toward the ocean beyond gentle swells" loading="lazy" decoding="async" width="480" height="360">
+            <span class="ph-meta"><span class="ph-num">46</span><span class="ph-place">Pacific</span></span>
           </a>
+          <!-- GALLERY:END -->
         </div>
+        <p class="gallery-empty">Nothing in this set yet.</p>
       </div>
     </section>
 
     <section class="section cta-band">
       <div class="container">
-        <h2>Want shots like these of your own?</h2>
-        <p class="lede">Automotive shoots, landscapes, or something new — let's talk about it.</p>
-        <a class="btn btn-primary" href="contact.html">Get in Touch</a>
+        <span class="kicker center" data-reveal="fade">Your turn</span>
+        <h2 class="lines"><span class="line"><span>Want shots like these <span class="display-i">of your own?</span></span></span></h2>
+        <p class="lede" data-reveal>Automotive shoots, landscapes, or something new. Let's talk about it.</p>
+        <a class="btn btn-primary" href="contact.html" data-reveal data-delay="1">Get in touch <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
       </div>
     </section>
   </main>
@@ -192,9 +276,9 @@
       <div class="footer-grid">
         <div>
           <a class="footer-brand" href="index.html">
-            <img src="assets/logo-stacked.png" alt="Aerial Capture Photography" width="142" height="118">
+            <img src="assets/logo-stacked.png" alt="Aerial Capture Photography" width="133" height="110" loading="lazy">
           </a>
-          <p class="footer-tag">Drone photography and videography — automotive and nature, captured from the skies.</p>
+          <p class="footer-tag">Drone photography and videography. Automotive and nature, captured from the skies.</p>
         </div>
         <nav class="footer-nav" aria-label="Footer">
           <h3>Explore</h3>
@@ -211,12 +295,16 @@
           <a href="https://www.instagram.com/aerialcapturephotography/" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
+      <div class="footer-big" aria-hidden="true">Aerial Capture</div>
       <div class="footer-bottom">
         <span>&copy; 2026 Aerial Capture Photography. All rights reserved.</span>
+        <span>Shot from above.</span>
       </div>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>
