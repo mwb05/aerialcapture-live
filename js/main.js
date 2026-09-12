@@ -152,7 +152,9 @@
       var title = depth.querySelector('.depth-title');
       gsap.set(layers, { transformPerspective: 1100, xPercent: -50, yPercent: -50, force3D: true });
       var tl = gsap.timeline({ defaults: { ease: 'none' } });
-      tl.fromTo(title, { opacity: 0, scale: .92 }, { opacity: 1, scale: 1, duration: .25 }, 0)
+      // Title lands in the first 12% of the pin (was 25%) so the hand-off from the statement above
+      // isn't a long stretch of empty dark before anything appears.
+      tl.fromTo(title, { opacity: 0, scale: .92 }, { opacity: 1, scale: 1, duration: .12 }, 0)
         .to(title, { opacity: 0, scale: 1.04, duration: .2 }, .8);
       layers.forEach(function (layer, i) {
         var offset = i * 0.09;

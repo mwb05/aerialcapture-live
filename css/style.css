@@ -342,15 +342,6 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
 .hero .kicker { color: var(--accent-strong); text-shadow: 0 2px 14px rgba(0, 0, 0, .7); }
 @media (max-width: 820px) { .hero-row { grid-template-columns: 1fr; } .hero-meta { text-align: left; } }
 
-.scroll-cue {
-  position: absolute; right: var(--gutter); bottom: 2rem; z-index: 2;
-  display: flex; flex-direction: column; align-items: center; gap: .6rem;
-  color: var(--muted); font-size: .62rem; letter-spacing: .26em; text-transform: uppercase;
-  writing-mode: vertical-rl;
-}
-.scroll-cue::after { content: ''; width: 1px; height: 56px; background: linear-gradient(var(--accent-strong), transparent); animation: cue 2.2s var(--ease) infinite; }
-@keyframes cue { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
-@media (max-width: 820px) { .scroll-cue { display: none; } }
 
 /* Interior page hero */
 .page-hero {
@@ -370,7 +361,13 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
    Statement — words light up as you scroll
    -------------------------------------------------------------------------- */
 
-.statement { padding: clamp(6rem, 16vw, 12rem) 0; }
+/* Tight bottom padding on purpose: the fly-through below is pinned and starts dark, so any extra
+   space here reads as a dead gap between the statement and "Fly through the frames". */
+.statement { padding: clamp(4rem, 9vw, 7rem) 0 clamp(1.5rem, 4vw, 3rem); }
+.statement-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.statement-media { margin: 0; border-radius: var(--radius); overflow: hidden; }
+.statement-media img { display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+@media (max-width: 820px) { .statement-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
 .statement p {
   font-family: var(--font-display);
   font-size: clamp(1.9rem, 4.4vw, 4rem);
@@ -380,9 +377,9 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
 .statement .w { display: inline-block; opacity: .16; transition: opacity .4s var(--ease); }
 .statement .w.is-lit, .statement.no-scrub .w { opacity: 1; }
 .statement em { font-style: italic; color: var(--accent-strong); }
-.statement-foot { display: grid; grid-template-columns: repeat(3, auto); gap: 3rem; margin-top: 3.5rem; color: var(--muted); font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; }
+.statement-foot { display: flex; flex-wrap: wrap; gap: .8rem 2.5rem; margin-top: 2.5rem; color: var(--muted); font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; }
 .statement-foot span::before { content: '— '; color: var(--accent); }
-@media (max-width: 640px) { .statement-foot { grid-template-columns: 1fr; gap: .8rem; } }
+@media (max-width: 640px) { .statement-foot { flex-direction: column; gap: .8rem; } }
 
 /* --------------------------------------------------------------------------
    Depth — 3D fly-through (pinned by GSAP)
@@ -417,8 +414,6 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
    -------------------------------------------------------------------------- */
 
 .filmstrip { position: relative; overflow: hidden; padding: clamp(4rem, 8vw, 6rem) 0 0; }
-.filmstrip-head { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 2.5rem; }
-.filmstrip-head .lede { margin: 0; }
 .filmstrip-viewport { position: relative; height: 100svh; display: flex; align-items: center; overflow: hidden; }
 .filmstrip-track { display: flex; gap: clamp(1rem, 2.5vw, 2.4rem); padding-left: var(--gutter); padding-right: var(--gutter); will-change: transform; }
 .frame {
@@ -662,22 +657,19 @@ body.lb-lock { overflow: hidden; }
    Footer
    -------------------------------------------------------------------------- */
 
-.site-footer { border-top: 1px solid var(--line); background: var(--bg); padding: clamp(3rem, 6vw, 5rem) 0 2rem; color: var(--muted); font-size: .92rem; position: relative; overflow: hidden; }
-.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.5rem; align-items: start; }
-@media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
-.footer-brand img { height: 110px; width: auto; }
-.footer-tag { margin-top: 1rem; max-width: 34ch; }
-.site-footer h3 { font-size: .7rem; text-transform: uppercase; letter-spacing: .24em; color: var(--text); margin-bottom: 1rem; font-weight: 500; }
+.site-footer { border-top: 1px solid var(--line); background: var(--bg); padding: clamp(2rem, 4vw, 3rem) 0 1.25rem; color: var(--muted); font-size: .88rem; position: relative; overflow: hidden; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2rem; align-items: start; }
+@media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+.footer-brand img { height: 72px; width: auto; }
+.footer-tag { margin-top: .75rem; max-width: 34ch; }
+.site-footer h3 { font-size: .7rem; text-transform: uppercase; letter-spacing: .24em; color: var(--text); margin-bottom: .75rem; font-weight: 500; }
 .footer-nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
 .footer-nav a, .footer-contact a { color: var(--muted); }
 .footer-nav a:hover, .footer-contact a:hover { color: var(--accent-strong); }
 .footer-contact { display: grid; gap: .5rem; }
-.footer-bottom { margin-top: 3rem; padding-top: 1.4rem; border-top: 1px solid var(--line); font-size: .8rem; color: var(--dim); display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; justify-content: space-between; }
-.footer-big {
-  font-family: var(--font-display); font-size: clamp(3rem, 12vw, 12rem); line-height: .85; letter-spacing: -0.04em;
-  color: rgba(242, 244, 246, .05); white-space: nowrap; user-select: none; pointer-events: none;
-  margin: 2rem 0 -1.5rem; text-align: center;
-}
+.footer-bottom { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .8rem; color: var(--dim); display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; justify-content: space-between; }
+/* .footer-big (the giant faded "Aerial Capture" wordmark) was removed 2026-09-12 — it alone added
+   ~12rem to the footer on every page. */
 
 /* --------------------------------------------------------------------------
    Motion preferences
