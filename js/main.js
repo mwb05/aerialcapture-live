@@ -11,7 +11,12 @@
   var finePointer = window.matchMedia('(pointer: fine)').matches;
   var desktop = window.matchMedia('(min-width: 821px)').matches;
   var hasGsap = !reduced && typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
-  if (hasGsap) window.gsap.registerPlugin(window.ScrollTrigger);
+  if (hasGsap) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+    // Phone browsers resize the viewport as the address bar shows/hides; refreshing pins on every
+    // one of those makes the pinned scenes jump. Only refresh on real orientation/width changes.
+    window.ScrollTrigger.config({ ignoreMobileResize: true });
+  }
 
   /* ---------------- Loaded state: letterbox bars open once the hero paints ------------ */
   function markLoaded() { body.classList.add('is-loaded'); }
@@ -166,7 +171,8 @@
           ]
         }, offset);
       });
-      ST.create({ trigger: depth, start: 'top top', end: '+=260%', pin: true, scrub: 1.1, animation: tl, anticipatePin: 1 });
+      // Phones get a shorter pin: the same seven frames at 2.6 screens of scroll was a long dark stretch.
+      ST.create({ trigger: depth, start: 'top top', end: desktop ? '+=260%' : '+=170%', pin: true, scrub: 1.1, animation: tl, anticipatePin: 1 });
     } else {
       // no-op
     }

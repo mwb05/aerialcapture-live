@@ -252,6 +252,8 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
 
 @media (max-width: 820px) {
   .brand-text small { display: none; }
+  .brand { font-size: .94rem; gap: .6rem; }
+  .brand img { height: 32px; }
   .nav-toggle { display: block; }
   .site-nav {
     position: fixed; inset: 0; z-index: 1;
@@ -407,7 +409,9 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
 /* Fallback when GSAP isn't driving: a quiet, layered collage behind the title */
 .depth.is-static .depth-layer { opacity: .28; width: calc(var(--w, 30vw) * .8); box-shadow: none; }
 .depth.is-static .depth-layer figcaption { display: none; }
-@media (max-width: 820px) { .depth-layer { width: calc(var(--w, 30vw) * 1.6); } }
+/* Phones: the frames need to be much larger than their desktop vw so they read as photos rather than
+   thumbnails once perspective shrinks them; main.js also shortens the pin on phones. */
+@media (max-width: 820px) { .depth-layer { width: calc(var(--w, 30vw) * 2.4); } }
 
 /* --------------------------------------------------------------------------
    Filmstrip — horizontal travel while pinned
@@ -445,11 +449,18 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
 .filmstrip.no-scrub .filmstrip-foot { display: none; }
 .filmstrip.no-scrub { padding-bottom: 2rem; }
 @media (max-width: 820px) {
-  .filmstrip-viewport { height: auto; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .filmstrip-viewport { height: auto; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: .5rem; }
   .filmstrip-viewport::-webkit-scrollbar { display: none; }
-  .frame { height: 60vh; scroll-snap-align: center; }
+  .filmstrip-track { align-items: center; }
+  /* Height is capped by width so the widest (16:9) frame still fits inside the viewport gutters. */
+  .frame { height: min(52vh, 48vw); scroll-snap-align: center; }
+  .frame.frame-text { width: 72vw; padding-right: 1rem; scroll-snap-align: start; }
+  .frame.frame-text h3 { font-size: 1.45rem; }
+  .frame.frame-text .lede { font-size: .95rem; margin: 0; }
+  .frame-meta { padding: .8rem .9rem; font-size: .66rem; }
+  .frame-meta .n { font-size: 1.25rem; }
   .filmstrip-foot { display: none; }
-  .filmstrip { padding-bottom: 2rem; }
+  .filmstrip { padding-bottom: 1.5rem; }
 }
 
 /* --------------------------------------------------------------------------
@@ -475,9 +486,18 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
 .chapter li { padding-left: 1.4rem; position: relative; }
 .chapter li::before { content: ''; position: absolute; left: 0; top: .72em; width: .5rem; height: 1px; background: var(--accent); }
 @media (max-width: 820px) {
-  .chapters { grid-template-columns: 1fr; }
-  .chapters-media { position: relative; top: 0; height: 56svh; }
-  .chapter { min-height: 0; }
+  /* display:block (not a 1-column grid) so the sticky photo's containing block is the whole section
+     and it stays pinned for all four chapters. Full-bleed so no copy peeks past its corners. */
+  .chapters { --ch-h: 38svh; display: block; }
+  .chapters-media {
+    position: sticky; top: 0; z-index: 2;
+    height: var(--ch-h); margin: 0 calc(-1 * var(--gutter)); border-radius: 0;
+  }
+  .chapters-media .ch-label { left: var(--gutter); bottom: 1rem; }
+  .chapters-media .ch-label b { font-size: 1.6rem; }
+  .chapter { min-height: 0; padding: 2rem 0; }
+  .chapter .num { font-size: 2.6rem; margin-bottom: .4rem; }
+  .chapter h2 { font-size: clamp(1.75rem, 7vw, 2.4rem); }
 }
 
 /* --------------------------------------------------------------------------
@@ -525,7 +545,7 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
 .split-media { border-radius: var(--radius); overflow: hidden; }
 .split-media img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
 .split-media.portrait img { aspect-ratio: 4/5; }
-@media (max-width: 820px) { .split { grid-template-columns: 1fr; } .split.reverse .split-media { order: -1; } }
+@media (max-width: 820px) { .split { grid-template-columns: 1fr; gap: 1.75rem; } .split.reverse .split-media { order: 1; } }
 
 /* --------------------------------------------------------------------------
    Brand band + CTA
@@ -566,6 +586,7 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
 .filters button small { color: inherit; opacity: .55; margin-left: .4rem; }
 
 .gallery-grid { columns: 3 320px; column-gap: 14px; }
+@media (max-width: 700px) { .gallery-grid { columns: 2; column-gap: 10px; } .gallery-grid .ph { margin-bottom: 10px; } .ph-meta { display: none; } }
 .gallery-grid .ph {
   display: block; break-inside: avoid; margin-bottom: 14px;
   border-radius: var(--radius); overflow: hidden; position: relative; background: var(--surface-2);
@@ -638,7 +659,7 @@ body.lb-lock { overflow: hidden; }
    -------------------------------------------------------------------------- */
 
 .contact-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(2rem, 6vw, 6rem); align-items: start; }
-@media (max-width: 820px) { .contact-layout { grid-template-columns: 1fr; } }
+@media (max-width: 820px) { .contact-layout { grid-template-columns: 1fr; } .contact-media { position: static; } }
 .contact-media { position: sticky; top: calc(var(--header-h) + 2rem); border-radius: var(--radius); overflow: hidden; }
 .contact-media img { aspect-ratio: 4/5; object-fit: cover; width: 100%; }
 .contact-direct { margin-top: 2rem; padding-top: 1.6rem; border-top: 1px solid var(--line); display: grid; gap: .6rem; color: var(--muted); }
