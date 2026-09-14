@@ -33,11 +33,21 @@
   var progress = document.querySelector('.progress');
   var lastY = window.scrollY;
   var solid = header.classList.contains('solid');
+  var mqMobile = window.matchMedia('(max-width: 820px)');
+  var navOpen = false;
+  var idleTimer = 0;
+  function revealHeader() { header.classList.remove('is-hidden'); }
   function onScroll() {
     var y = window.scrollY;
     if (!solid) header.classList.toggle('scrolled', y > 24);
-    if (y > lastY + 8 && y > 480) header.classList.add('is-hidden');
-    else if (y < lastY - 8 || y <= 480) header.classList.remove('is-hidden');
+    // Never pull the header (and the menu button with it) off-screen while the menu is open.
+    if (!navOpen) {
+      if (y > lastY + 8 && y > 480) header.classList.add('is-hidden');
+      else if (y < lastY - 8 || y <= 480) revealHeader();
+      // On phones the hamburger is the ONLY way to navigate, so it can't stay hidden:
+      // bring the header back as soon as the finger stops moving.
+      if (mqMobile.matches) { clearTimeout(idleTimer); idleTimer = setTimeout(revealHeader, 220); }
+    }
     lastY = y;
     if (progress) {
       var max = document.documentElement.scrollHeight - window.innerHeight;
@@ -49,21 +59,31 @@
 
   /* ---------------- Mobile nav ----------------------------------------------------------- */
   var toggle = document.querySelector('.nav-toggle');
-  function closeNav() {
-    header.classList.remove('nav-open');
-    body.classList.remove('nav-lock');
-    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  function setNav(open) {
+    navOpen = open;
+    header.classList.toggle('nav-open', open);
+    body.classList.toggle('nav-lock', open);
+    // The open panel is anchored to the header, so the header must be parked at the top.
+    clearTimeout(idleTimer);
+    if (open) revealHeader();
+    lastY = window.scrollY;
+    if (toggle) toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
+  function closeNav() { setNav(false); }
   if (toggle) {
-    toggle.addEventListener('click', function () {
-      var open = header.classList.toggle('nav-open');
-      body.classList.toggle('nav-lock', open);
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      setNav(!header.classList.contains('nav-open'));
     });
     document.querySelectorAll('.site-nav a').forEach(function (a) { a.addEventListener('click', closeNav); });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && header.classList.contains('nav-open')) { closeNav(); toggle.focus(); }
     });
+    // Rotating to landscape / resizing past the desktop breakpoint hides the panel but used to
+    // leave body.nav-lock on, freezing the page. Close it when we leave the mobile layout.
+    var onMq = function () { if (!mqMobile.matches && navOpen) closeNav(); };
+    if (mqMobile.addEventListener) mqMobile.addEventListener('change', onMq);
+    else if (mqMobile.addListener) mqMobile.addListener(onMq);
   }
 
   /* ---------------- Custom cursor (desktop only) ----------------------------------------- */

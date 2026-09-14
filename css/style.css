@@ -215,6 +215,13 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
   -webkit-backdrop-filter: blur(14px) saturate(140%);
 }
 .site-header.is-hidden:not(.nav-open) { transform: translateY(-100%); }
+/* While the menu is open the header must never be transformed or mid-transform: a transform
+   also makes it the containing block for the fixed panel, which would drag the menu off-screen
+   for the half-second the un-hide animation runs. */
+.site-header.nav-open {
+  transform: none;
+  transition-property: background-color, border-color;
+}
 
 .header-inner { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 
@@ -256,10 +263,20 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
   .brand img { height: 32px; }
   .nav-toggle { display: block; }
   .site-nav {
-    position: fixed; inset: 0; z-index: 1;
-    background: rgba(5, 8, 13, .96);
-    display: grid; align-content: center;
+    /* Sized in viewport units, NOT `inset: 0`. The header is position:fixed and turns on
+       backdrop-filter when it goes glassy (.scrolled/.solid/.nav-open) — a backdrop-filter
+       makes an element the containing block for its position:fixed descendants, so `inset: 0`
+       resolved against the 76px-tall header and collapsed this panel to a 124px strip with
+       Home and About sitting above the top of the screen. Viewport units are immune to that. */
+    position: fixed; top: 0; left: 0; right: auto; bottom: auto; z-index: 1;
+    width: 100vw; height: 100vh; height: 100dvh;
+    background: rgba(5, 8, 13, .985);
+    backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%);
+    display: grid;
+    align-content: center;
+    align-content: safe center;   /* short/landscape phones: overflow downward, never off the top */
     padding: var(--header-h) var(--gutter) 3rem;
+    overflow-y: auto; overscroll-behavior: contain;
     opacity: 0; visibility: hidden;
     transition: opacity .4s var(--ease), visibility .4s;
   }
@@ -277,12 +294,29 @@ body.is-loaded .letterbox.bottom { transform: translateY(101%); }
   .site-header.nav-open .site-nav li:nth-child(3) a { transition-delay: .12s; }
   .site-header.nav-open .site-nav li:nth-child(4) a { transition-delay: .18s; }
   .site-nav a::after { display: none; }
-  .nav-cta { display: block; margin-top: 2rem; color: var(--muted); font-size: .95rem; }
-  .nav-cta a { color: var(--accent-strong); }
+  .nav-cta { display: block; margin-top: 2rem; margin-bottom: 0; color: var(--muted); font-size: .9rem; }
+  /* The `.site-nav a` rule above is meant for the four big menu links; it was also catching the
+     email here, blowing it up to 38px of display serif so it ran off the right edge. Put it back
+     to a small body-font line that wraps. */
+  .nav-cta a {
+    display: inline-block; max-width: 100%;
+    font-family: var(--font-body); font-size: 1em; line-height: 1.5;
+    letter-spacing: 0; padding: 0;
+    overflow-wrap: anywhere; word-break: break-word;
+    color: var(--accent-strong);
+  }
   .nav-open .nav-toggle .bar:nth-child(1) { transform: translateY(5px) rotate(45deg); }
   .nav-open .nav-toggle .bar:nth-child(2) { opacity: 0; }
   .nav-open .nav-toggle .bar:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
   body.nav-lock { overflow: hidden; }
+
+  /* Landscape phones (and split-screen): four display-size links don't fit 375px of height.
+     Shrink them so the whole menu is reachable without scrolling for it. */
+  @media (max-height: 560px) {
+    .site-nav { padding-top: calc(var(--header-h) - .5rem); padding-bottom: 1.25rem; }
+    .site-nav ul a { font-size: clamp(1.4rem, 6vh, 2.1rem); padding: .5rem 0; }
+    .nav-cta { margin-top: 1rem; font-size: .8rem; }
+  }
 }
 
 /* --------------------------------------------------------------------------
