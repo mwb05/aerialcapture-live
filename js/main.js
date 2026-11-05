@@ -18,10 +18,52 @@
     window.ScrollTrigger.config({ ignoreMobileResize: true });
   }
 
+  /* ---------------- Smooth scroll (Lenis, desktop pointers only) ---------------------- */
+  // Touch devices keep native momentum scrolling; Lenis only eases wheel/trackpad input and is
+  // driven off GSAP's ticker so every ScrollTrigger scene stays in lockstep with it.
+  var lenis = null;
+  if (hasGsap && finePointer && typeof window.Lenis === 'function') {
+    try {
+      lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true, wheelMultiplier: 1 });
+      lenis.on('scroll', window.ScrollTrigger.update);
+      window.gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+      window.gsap.ticker.lagSmoothing(0);
+    } catch (err) { lenis = null; }
+  }
+  function lockScroll(on) { if (lenis) { if (on) lenis.stop(); else lenis.start(); } }
+  // Same-page anchors (#book, index.html#services ...) glide instead of jumping.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="#"]');
+    if (!a || a.target === '_blank') return;
+    var url = new URL(a.href, window.location.href);
+    if (url.pathname !== window.location.pathname || !url.hash || url.hash === '#main') return;
+    var target = document.querySelector(url.hash);
+    if (!target) return;
+    e.preventDefault();
+    if (lenis) lenis.scrollTo(target, { duration: 1.4 });
+    else target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+    if (history.replaceState) history.replaceState(null, '', url.hash);
+  });
+
   /* ---------------- Loaded state: letterbox bars open once the hero paints ------------ */
-  function markLoaded() { body.classList.add('is-loaded'); }
+  function markLoaded() {
+    if (body.classList.contains('is-loaded')) return;
+    body.classList.add('is-loaded');
+    // once the HUD's 1.1s + 1.2s load fade is done, drop its transition so the scroll fade is 1:1
+    var hud = document.querySelector('.hud');
+    if (hud) setTimeout(function () { hud.classList.add('is-scrubbing'); }, 2500);
+  }
   var heroImg = document.querySelector('.hero-img img');
-  if (heroImg && !heroImg.complete) {
+  var heroVideo = document.querySelector('.vhero-video');
+  if (heroVideo) {
+    if (reduced) { heroVideo.removeAttribute('autoplay'); heroVideo.pause(); }
+    if (heroVideo.readyState >= 2) setTimeout(markLoaded, 150);
+    else {
+      heroVideo.addEventListener('loadeddata', markLoaded);
+      heroVideo.addEventListener('error', markLoaded);
+      setTimeout(markLoaded, 1400); // the poster is already painted; never wait long on the video
+    }
+  } else if (heroImg && !heroImg.complete) {
     heroImg.addEventListener('load', markLoaded);
     heroImg.addEventListener('error', markLoaded);
     setTimeout(markLoaded, 1800); // never hold the page hostage to a slow image
@@ -63,6 +105,7 @@
     navOpen = open;
     header.classList.toggle('nav-open', open);
     body.classList.toggle('nav-lock', open);
+    lockScroll(open);
     // The open panel is anchored to the header, so the header must be parked at the top.
     clearTimeout(idleTimer);
     if (open) revealHeader();
@@ -101,10 +144,63 @@
       requestAnimationFrame(tick);
     })();
     document.addEventListener('mouseover', function (e) {
-      var view = e.target.closest('[data-lightbox], .frame, .depth-layer');
+      var play = e.target.closest('.reel-item');
+      var view = play || e.target.closest('[data-lightbox], a.frame, .depth-layer');
       var link = e.target.closest('a, button, [role="button"], input, textarea, label');
+      cursor.setAttribute('data-label', play ? 'Play' : 'View');
       cursor.classList.toggle('is-view', !!view);
       cursor.classList.toggle('is-link', !view && !!link);
+    });
+  }
+
+  /* ---------------- Hero title: split into characters for the staggered rise -------------- */
+  var charIndex = 0;
+  document.querySelectorAll('.vhero-title .split').forEach(function (line) {
+    var text = line.textContent;
+    line.textContent = '';
+    text.split('').forEach(function (c) {
+      if (c === ' ') { line.appendChild(document.createTextNode(' ')); return; }
+      var s = document.createElement('span');
+      s.className = 'ch';
+      s.style.setProperty('--d', charIndex++);
+      s.textContent = c;
+      line.appendChild(s);
+    });
+  });
+
+  /* ---------------- Hero HUD: running timecode off the video clock ----------------------- */
+  var hudTc = document.querySelector('.hud-tc');
+  var hudAlt = document.querySelector('.hud-alt-n');
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  if (heroVideo && hudTc && !reduced) {
+    (function tc() {
+      if (window.scrollY < window.innerHeight * 2) {
+        var t = heroVideo.currentTime || 0, s = Math.floor(t);
+        hudTc.textContent = '00:00:' + pad2(s % 60) + ':' + pad2(Math.floor((t - s) * 24));
+      }
+      requestAnimationFrame(tc);
+    })();
+  }
+
+  /* ---------------- Hero scene: the camera pulls back and the frame tilts away ------------ */
+  // Created before every other ScrollTrigger so its pin spacing is in place when the scenes
+  // further down the page measure their start/end positions.
+  var vhero = document.querySelector('.vhero');
+  if (vhero && hasGsap) {
+    var vFrame = vhero.querySelector('.vhero-frame');
+    var vTl = window.gsap.timeline({ defaults: { ease: 'none' } });
+    vTl.to('.vhero-content', { y: -110, opacity: 0, duration: 0.45 }, 0)
+      .to('.vhero-scroll', { opacity: 0, duration: 0.15 }, 0)
+      .fromTo(vFrame,
+        { clipPath: 'inset(0% 0% 0% 0% round 0px)', rotateX: 0, scale: 1, y: 0, transformPerspective: 1400 },
+        { clipPath: desktop ? 'inset(10% 8% 3% 8% round 28px)' : 'inset(14% 5% 3% 5% round 18px)',
+          rotateX: desktop ? 16 : 9, scale: 0.9, y: -30, duration: 1 }, 0)
+      // The HUD's own opacity belongs to its CSS load fade; scroll drives a separate variable.
+      .fromTo('.hud', { '--hud-fade': 1 }, { '--hud-fade': 0, duration: 0.35 }, 0.55);
+    window.ScrollTrigger.create({
+      trigger: vhero, start: 'top top', end: desktop ? '+=95%' : '+=60%',
+      pin: true, scrub: 0.8, animation: vTl, anticipatePin: 1,
+      onUpdate: function (self) { if (hudAlt) hudAlt.textContent = String(Math.round(120 + Math.min(1, self.progress / 0.55) * 280)); }
     });
   }
 
@@ -170,6 +266,56 @@
         scrollTrigger: { trigger: hero, start: '30% top', end: 'bottom top', scrub: true } });
     }
 
+    // Sections swing up into place: a short 3D tilt-and-rise scrubbed to the scroll.
+    var sceneIn = function (el) {
+      gsap.fromTo(el,
+        { y: desktop ? 90 : 50, rotateX: desktop ? 10 : 6, scale: 0.97, opacity: 0.2, transformPerspective: 1400, transformOrigin: '50% 0%' },
+        { y: 0, rotateX: 0, scale: 1, opacity: 1, ease: 'none',
+          scrollTrigger: { trigger: el, start: 'top 98%', end: 'top 58%', scrub: 0.6 } });
+    };
+    var depthEl = document.querySelector('.depth');
+    var belowPins = function (el) { return depthEl && (depthEl.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING); };
+    var scenes = Array.prototype.slice.call(document.querySelectorAll('[data-scene]'));
+    // Scenes above the pinned fly-through are created now; the rest after its pins (below).
+    scenes.filter(function (el) { return !belowPins(el); }).forEach(sceneIn);
+
+    // Parallax drift on single media blocks
+    document.querySelectorAll('[data-parallax]').forEach(function (el) {
+      var amt = parseFloat(el.getAttribute('data-parallax')) || 8;
+      gsap.fromTo(el, { yPercent: -amt }, { yPercent: amt, ease: 'none',
+        scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+
+    // Services: each card sinks back into the stack as the next one slides over it
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.stack-card'));
+    cards.forEach(function (card, i) {
+      var dim = document.createElement('div'); dim.className = 'stack-dim'; card.appendChild(dim);
+      var next = cards[i + 1];
+      if (!next) return;
+      var st = { trigger: next, start: 'top bottom', end: 'top 25%', scrub: true };
+      gsap.to(card, { scale: 0.9 + i * 0.02, rotateX: desktop ? 7 : 4, transformPerspective: 1600, transformOrigin: '50% 0%', ease: 'none', scrollTrigger: st });
+      gsap.to(dim, { opacity: 0.55, ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top 25%', scrub: true } });
+    });
+
+    // Reel: each clip drifts inside its tile (the frame is 118% tall), alternating direction, so
+    // the grid reads as layered depth without tiles ever crossing their gutters.
+    var reelGrid = document.querySelector('.reel-grid');
+    if (reelGrid) {
+      reelGrid.querySelectorAll('.reel-item').forEach(function (el, i) {
+        var v = el.querySelector('video'); if (!v) return;
+        var s = (i % 2 ? -1 : 1) * (desktop ? 7 : 5);
+        gsap.fromTo(v, { yPercent: -s, scale: 1.02 }, { yPercent: s, scale: 1.02, ease: 'none',
+          scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
+      });
+    }
+
+    // Part 107 badge: the ring turns with the scroll instead of spinning on its own
+    var ring = document.querySelector('.license-badge .ring');
+    if (ring) {
+      gsap.fromTo(ring, { rotation: -60, svgOrigin: '60 60' }, { rotation: 120, svgOrigin: '60 60', ease: 'none',
+        scrollTrigger: { trigger: ring.closest('.license'), start: 'top bottom', end: 'bottom top', scrub: true } });
+    }
+
     // Depth: seven frames fly past the camera while the section is pinned
     var depth = document.querySelector('.depth');
     if (depth) {
@@ -219,6 +365,14 @@
       strip.classList.add('no-scrub');
     }
 
+    // Everything below the pins, now that their spacing exists
+    scenes.filter(belowPins).forEach(sceneIn);
+    var bookBg = document.querySelector('.book-bg');
+    if (bookBg) {
+      gsap.fromTo(bookBg, { yPercent: -8 }, { yPercent: 8, ease: 'none',
+        scrollTrigger: { trigger: bookBg.parentNode, start: 'top bottom', end: 'bottom top', scrub: true } });
+    }
+
     window.addEventListener('load', function () { ST.refresh(); });
   } else {
     var d = document.querySelector('.depth'); if (d) d.classList.add('is-static');
@@ -226,27 +380,81 @@
     document.querySelectorAll('.frame').forEach(function (f) { f.classList.add('is-in'); });
   }
 
-  /* ---------------- Chapters: sticky image follows the active chapter --------------------- */
-  var chapters = document.querySelectorAll('.chapter');
-  var chMedia = document.querySelector('.chapters-media');
-  if (chapters.length && chMedia && 'IntersectionObserver' in window) {
-    var chImgs = chMedia.querySelectorAll('img');
-    var chNum = chMedia.querySelector('.ch-num');
-    var chName = chMedia.querySelector('.ch-name');
-    var setChapter = function (i) {
-      chImgs.forEach(function (img) {
-        var on = img.getAttribute('data-chapter') === String(i);
-        if (on && img.loading === 'lazy') img.loading = 'eager'; // make sure the swap never shows a blank frame
-        img.classList.toggle('is-active', on);
+  /* ---------------- In-page video: load when near, play while visible -------------------- */
+  // Every clip ships preload="none" with its source in data-src, so the page only pulls the
+  // few megabytes of footage the visitor actually scrolls to. Reduced motion keeps the posters.
+  var autoVids = Array.prototype.slice.call(document.querySelectorAll('video[data-autoplay]'));
+  function loadVid(v) {
+    if (v.getAttribute('data-loaded')) return;
+    v.querySelectorAll('source[data-src]').forEach(function (s) { s.src = s.getAttribute('data-src'); });
+    v.setAttribute('data-loaded', '1');
+    v.load();
+  }
+  function playVid(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  if (autoVids.length && 'IntersectionObserver' in window && !reduced) {
+    var vIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var v = en.target;
+        if (en.isIntersecting) { loadVid(v); playVid(v); } else if (!v.paused) v.pause();
       });
-      var next = chImgs[i + 1]; if (next && next.loading === 'lazy') next.loading = 'eager';
-      if (chNum) chNum.textContent = String(i + 1).padStart(2, '0');
-      if (chName) chName.textContent = chapters[i].getAttribute('data-name') || '';
+    }, { rootMargin: '150px 0px', threshold: 0.01 });
+    autoVids.forEach(function (v) { vIo.observe(v); });
+  }
+
+  /* ---------------- Video viewer for the reel -------------------------------------------- */
+  var reelItems = Array.prototype.slice.call(document.querySelectorAll('.reel-item[data-full]'));
+  if (reelItems.length) {
+    var vlb = null, vlbVideo, vlbCap, vlbClose, vlbLast = null;
+    var buildVlb = function () {
+      vlb = document.createElement('div');
+      vlb.className = 'vlb';
+      vlb.setAttribute('role', 'dialog');
+      vlb.setAttribute('aria-modal', 'true');
+      vlb.setAttribute('aria-label', 'Video viewer');
+      vlb.innerHTML =
+        '<figure><video controls playsinline muted loop></video><figcaption></figcaption></figure>' +
+        '<button type="button" class="lb-btn lb-close" aria-label="Close video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>';
+      document.body.appendChild(vlb);
+      vlbVideo = vlb.querySelector('video');
+      vlbCap = vlb.querySelector('figcaption');
+      vlbClose = vlb.querySelector('.lb-close');
+      vlbClose.addEventListener('click', closeVlb);
+      vlb.addEventListener('click', function (e) { if (e.target === vlb || e.target.tagName === 'FIGURE') closeVlb(); });
     };
-    var chIo = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) setChapter(+en.target.getAttribute('data-index')); });
-    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-    chapters.forEach(function (c) { chIo.observe(c); });
+    var onVlbKey = function (e) {
+      if (e.key === 'Escape') closeVlb();
+      if (e.key === 'Tab') { e.preventDefault(); (document.activeElement === vlbClose ? vlbVideo : vlbClose).focus(); }
+    };
+    var openVlb = function (item) {
+      if (!vlb) buildVlb();
+      vlbLast = item;
+      vlbVideo.src = item.getAttribute('data-full');
+      vlbVideo.poster = (item.querySelector('video') || {}).poster || '';
+      vlbCap.textContent = '';
+      var cat = document.createElement('span'); cat.textContent = item.getAttribute('data-cat') || '';
+      vlbCap.appendChild(cat);
+      vlbCap.appendChild(document.createTextNode(item.getAttribute('data-title') || ''));
+      vlb.classList.add('open');
+      body.classList.add('lb-lock');
+      lockScroll(true);
+      playVid(vlbVideo);
+      vlbClose.focus();
+      document.addEventListener('keydown', onVlbKey);
+    };
+    var closeVlb = function () {
+      vlb.classList.remove('open');
+      body.classList.remove('lb-lock');
+      lockScroll(false);
+      vlbVideo.pause();
+      document.removeEventListener('keydown', onVlbKey);
+      setTimeout(function () { if (!vlb.classList.contains('open')) { vlbVideo.removeAttribute('src'); vlbVideo.load(); } }, 450);
+      if (vlbLast) vlbLast.focus();
+    };
+    reelItems.forEach(function (item) {
+      var label = (item.getAttribute('data-title') || 'clip');
+      item.setAttribute('aria-label', 'Play video: ' + label);
+      item.addEventListener('click', function () { openVlb(item); });
+    });
   }
 
   /* ---------------- Gallery filters ------------------------------------------------------- */
@@ -283,8 +491,12 @@
       var name = (contactForm.querySelector('#name') || {}).value || '';
       var email = (contactForm.querySelector('#email') || {}).value || '';
       var message = (contactForm.querySelector('#message') || {}).value || '';
-      var subject = name ? 'Shoot inquiry from ' + name : 'Shoot inquiry';
-      var bodyText = message + '\n\n—\n' + (name ? name + '\n' : '') + email;
+      var service = (contactForm.querySelector('input[name="service"]:checked') || {}).value || '';
+      var where = (contactForm.querySelector('#location') || {}).value || '';
+      var when = (contactForm.querySelector('#date') || {}).value || '';
+      var subject = (service ? service + ' inquiry' : 'Shoot inquiry') + (name ? ' from ' + name : '');
+      var details = [service && 'Service: ' + service, where && 'Location: ' + where, when && 'Preferred date: ' + when].filter(Boolean).join('\n');
+      var bodyText = (details ? details + '\n\n' : '') + message + '\n\n—\n' + (name ? name + '\n' : '') + email;
       window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyText);
       var note = contactForm.querySelector('.form-sent');
       if (!note) { note = document.createElement('p'); note.className = 'form-sent'; contactForm.appendChild(note); }
@@ -367,6 +579,7 @@
     show(links.indexOf(link));
     lb.classList.add('open');
     body.classList.add('lb-lock');
+    lockScroll(true);
     btnClose.focus();
     document.addEventListener('keydown', onKey);
   }
@@ -374,6 +587,7 @@
   function close() {
     lb.classList.remove('open');
     body.classList.remove('lb-lock');
+    lockScroll(false);
     setTimeout(function () { if (!lb.classList.contains('open')) { lbImg.src = ''; lbImg.classList.remove('is-ready'); } }, 450);
     document.removeEventListener('keydown', onKey);
     if (lastFocus) lastFocus.focus();

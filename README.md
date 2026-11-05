@@ -1,4 +1,4 @@
-# Aerial Capture Photography — Static Site (cinematic rebuild, 2026-09-12)
+# Aerial Capture Photography - Static Site (video rebuild v5, 2026-11-04)
 
 Pure static HTML/CSS/JS. No framework, no bundler. The one build step regenerates the gallery
 grid from a manifest and validates the site; see **Build** below.
@@ -77,3 +77,34 @@ DNS at Hostinger (nameservers stay ns1/ns2.dns-parking.com):
 - Photo categories in the manifest: automotive 6, cities 6, alpine 17, coast 9, wild 8.
 - og:image is the Varenna / Lake Como aerial.
 - External dependencies: Google Fonts (Inter, Instrument Serif) and cdnjs (GSAP).
+
+## v5 video rebuild (2026-11-04)
+
+Home page rebuilt around motion: full-bleed video hero with a drone-camera HUD (live timecode, altitude
+that climbs to 400 ft as you scroll) that pulls back into a tilted 3D frame, an FAA Part 107 credential
+strip and panel, three stacked sticky service cards (aerial photography, drone videography, real estate &
+commercial), a 9-clip video reel with a full-screen viewer, the existing 3D photo fly-through and
+filmstrip, a process section and an on-page booking form (service, location, date). Lenis smooth scroll
+(jsdelivr CDN) drives desktop wheel scrolling in step with GSAP; touch devices keep native scrolling.
+All 46 photos and every original asset are untouched.
+
+### Video assets - STOCK STAND-INS, replace with Matt's footage
+
+`assets/video/` holds compressed (H.264, no audio, 10-14 s, faststart) clips from Mixkit's free
+license (free for commercial use, no attribution). They are placeholders until Matt sends his own
+footage. Each clip is an `.mp4` + same-name `.jpg` poster. To swap one, keep the file name (or update
+the reel tile's `data-full`, `data-src`, `poster` and title in `index.html`, and drop its `data-stock`).
+
+| File | Used for | Mixkit id |
+|---|---|---|
+| hero-1080.mp4 / hero-720.mp4 / hero-1080.jpg | Hero (720 on phones) | 4998 |
+| alpine-valley | Videography card + reel | 15919 |
+| neighborhood-topdown | Real estate card + reel | 48394 |
+| mountain-road, coast-topdown, property-reveal, construction-progress, tower-orbit, city-establishing, lagoon-reveal | Reel | 41537, 51502, 27543, 42333, 49861, 42338, 5008 |
+
+Encode new footage the same way (ffmpeg):
+`-an -vf scale=1280:-2,fps=24 -c:v libx264 -preset slow -crf 27 -movflags +faststart`
+(hero: 1920 wide, crf 22). Keep clips around 1-4 MB.
+
+QA harness for this rebuild: `_qa/v5/shots.mjs` (desktop + phone viewport shots, overflow sweep, JS
+errors). Design audit notes: `../design-audit.md`.
