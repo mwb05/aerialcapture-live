@@ -8,6 +8,8 @@
   var body = document.body;
   var header = document.querySelector('.site-header');
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // WCAG 2.2.2: every looping video can be paused with the hero's pause button (motion-toggle).
+  var motionPaused = reduced;
   var finePointer = window.matchMedia('(pointer: fine)').matches;
   var desktop = window.matchMedia('(min-width: 821px)').matches;
   var hasGsap = !reduced && typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
@@ -390,7 +392,7 @@
     v.setAttribute('data-loaded', '1');
     v.load();
   }
-  function playVid(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  function playVid(v) { if (motionPaused) return; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
   if (autoVids.length && 'IntersectionObserver' in window && !reduced) {
     var vIo = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
@@ -399,6 +401,26 @@
       });
     }, { rootMargin: '150px 0px', threshold: 0.01 });
     autoVids.forEach(function (v) { vIo.observe(v); });
+  }
+
+  /* ---------------- Pause / play all background video (WCAG 2.2.2) ------------------------ */
+  var motionBtn = document.querySelector('.motion-toggle');
+  if (motionBtn) {
+    var motionLabel = motionBtn.querySelector('.mt-label');
+    var syncMotion = function () {
+      motionLabel.textContent = motionPaused ? 'Play background video' : 'Pause background video';
+      body.classList.toggle('motion-paused', motionPaused);
+    };
+    syncMotion();
+    motionBtn.addEventListener('click', function () {
+      motionPaused = !motionPaused;
+      [heroVideo].concat(autoVids).forEach(function (v) {
+        if (!v) return;
+        if (motionPaused) v.pause();
+        else if (v === heroVideo || v.getAttribute('data-loaded')) playVid(v);
+      });
+      syncMotion();
+    });
   }
 
   /* ---------------- Video viewer for the reel -------------------------------------------- */
