@@ -57,6 +57,7 @@
   }
   var heroImg = document.querySelector('.hero-img img');
   var heroVideo = document.querySelector('.vhero-video');
+  var heroPhoto = document.querySelector('.vhero-photo');
   if (heroVideo) {
     if (reduced) { heroVideo.removeAttribute('autoplay'); heroVideo.pause(); }
     if (heroVideo.readyState >= 2) setTimeout(markLoaded, 150);
@@ -65,6 +66,10 @@
       heroVideo.addEventListener('error', markLoaded);
       setTimeout(markLoaded, 1400); // the poster is already painted; never wait long on the video
     }
+  } else if (heroPhoto && !heroPhoto.complete) {
+    heroPhoto.addEventListener('load', markLoaded);
+    heroPhoto.addEventListener('error', markLoaded);
+    setTimeout(markLoaded, 1400);
   } else if (heroImg && !heroImg.complete) {
     heroImg.addEventListener('load', markLoaded);
     heroImg.addEventListener('error', markLoaded);
@@ -170,15 +175,19 @@
     });
   });
 
-  /* ---------------- Hero HUD: running timecode off the video clock ----------------------- */
+  /* ---------------- Hero HUD: running timecode (video clock, or a plain clock over a still) */
   var hudTc = document.querySelector('.hud-tc');
   var hudAlt = document.querySelector('.hud-alt-n');
   function pad2(n) { return (n < 10 ? '0' : '') + n; }
-  if (heroVideo && hudTc && !reduced) {
+  if ((heroVideo || heroPhoto) && hudTc && !reduced) {
+    var tcClock = 0, tcLast = performance.now();
     (function tc() {
+      var now = performance.now();
+      if (!motionPaused) tcClock += (now - tcLast) / 1000;
+      tcLast = now;
       if (window.scrollY < window.innerHeight * 2) {
-        var t = heroVideo.currentTime || 0, s = Math.floor(t);
-        hudTc.textContent = '00:00:' + pad2(s % 60) + ':' + pad2(Math.floor((t - s) * 24));
+        var t = heroVideo ? (heroVideo.currentTime || 0) : tcClock, s = Math.floor(t);
+        hudTc.textContent = '00:' + pad2(Math.floor(s / 60) % 60) + ':' + pad2(s % 60) + ':' + pad2(Math.floor((t - s) * 24));
       }
       requestAnimationFrame(tc);
     })();
@@ -408,7 +417,7 @@
   if (motionBtn) {
     var motionLabel = motionBtn.querySelector('.mt-label');
     var syncMotion = function () {
-      motionLabel.textContent = motionPaused ? 'Play background video' : 'Pause background video';
+      motionLabel.textContent = motionPaused ? 'Play motion' : 'Pause motion';
       body.classList.toggle('motion-paused', motionPaused);
     };
     syncMotion();

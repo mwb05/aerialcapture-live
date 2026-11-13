@@ -15,7 +15,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="preload" as="image" href="assets/video/hero-1080.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/hero-skogafoss-2400.jpg" imagesrcset="assets/hero-skogafoss-1200.jpg 1200w, assets/hero-skogafoss-2400.jpg 2400w" imagesizes="100vw" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -77,16 +77,13 @@
 
   <main id="main">
 
-    <!-- ================= VIDEO HERO =================
-         Hero footage is a licensed stock stand-in (Mixkit free license) until Matt's own reel
-         arrives: swap assets/video/hero-*.mp4 + hero-1080.jpg, keep the file names. -->
+    <!-- ================= HERO =================
+         Matt's own aerial of Skogafoss, Iceland (source: ../assets/max_0091-*.jpeg). Only Matt's
+         own photos and footage go on this site: no stock stand-ins. -->
     <section class="vhero" id="top" aria-label="Introduction">
       <div class="vhero-stage">
         <div class="vhero-frame">
-          <video class="vhero-video" autoplay muted loop playsinline preload="auto" poster="assets/video/hero-1080.jpg" aria-hidden="true">
-            <source src="assets/video/hero-720.mp4" type="video/mp4" media="(max-width: 820px)">
-            <source src="assets/video/hero-1080.mp4" type="video/mp4">
-          </video>
+          <img class="vhero-photo" src="assets/hero-skogafoss-2400.jpg" srcset="assets/hero-skogafoss-1200.jpg 1200w, assets/hero-skogafoss-2400.jpg 2400w" sizes="100vw" alt="" width="2400" height="1350" fetchpriority="high" decoding="async">
           <div class="vhero-shade" aria-hidden="true"></div>
           <div class="hud" aria-hidden="true">
             <span class="hud-corner tl"></span><span class="hud-corner tr"></span><span class="hud-corner bl"></span><span class="hud-corner br"></span>
@@ -108,11 +105,11 @@
             <p class="vhero-tagline" data-reveal data-delay="2">The view most people never get to see. Aerial stills and 4K film for real estate, commercial, automotive and landscape work, flown under an FAA Part 107 certificate.</p>
             <div class="vhero-actions" data-reveal data-delay="3">
               <a class="btn btn-primary" href="#book">Book a flight <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
-              <a class="btn btn-ghost" href="#motion">Watch the work</a>
+              <a class="btn btn-ghost" href="#stills">See the work</a>
             </div>
           </div>
         </div>
-        <button type="button" class="motion-toggle"><svg viewBox="0 0 16 16" aria-hidden="true" width="14" height="14"><path class="mt-pause" d="M4 3h3v10H4zM9 3h3v10H9z" fill="currentColor"/><path class="mt-play" d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg><span class="mt-label">Pause background video</span></button>
+        <button type="button" class="motion-toggle"><svg viewBox="0 0 16 16" aria-hidden="true" width="14" height="14"><path class="mt-pause" d="M4 3h3v10H4zM9 3h3v10H9z" fill="currentColor"/><path class="mt-play" d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg><span class="mt-label">Pause motion</span></button>
         <a class="vhero-scroll" href="#intro" aria-label="Scroll to content"><span>Scroll</span><i></i></a>
       </div>
     </section>
@@ -175,7 +172,7 @@
 
         <article class="stack-card" style="--i:1">
           <div class="stack-media">
-            <video muted loop playsinline preload="none" poster="assets/video/alpine-valley.jpg" data-autoplay aria-hidden="true"><source data-src="assets/video/alpine-valley.mp4" type="video/mp4"></video>
+            <img src="assets/full/dji-fly-20250504-182026.jpg" alt="Hilltop village surrounded by rolling green countryside, photographed from the air" loading="lazy" decoding="async" width="1600" height="1200">
           </div>
           <div class="stack-body">
             <span class="stack-n">02</span>
@@ -186,13 +183,13 @@
               <li>Color-graded 4K masters plus social cuts</li>
               <li>Finished highlight edits on request</li>
             </ul>
-            <a class="btn-line" href="#motion">Watch the reel</a>
+            <a class="btn-line" href="#book">Plan a video shoot</a>
           </div>
         </article>
 
         <article class="stack-card" style="--i:2">
           <div class="stack-media">
-            <video muted loop playsinline preload="none" poster="assets/video/neighborhood-topdown.jpg" data-autoplay aria-hidden="true"><source data-src="assets/video/neighborhood-topdown.mp4" type="video/mp4"></video>
+            <img src="assets/full/max-0136.jpg" alt="Aerial view of a vineyard estate with solar-roofed buildings among the vines" loading="lazy" decoding="async" width="1600" height="1200">
           </div>
           <div class="stack-body">
             <span class="stack-n">03</span>
@@ -232,57 +229,6 @@
             <li><b>Safety</b>Flown within FAA operating limits</li>
           </ul>
         </div>
-      </div>
-    </section>
-
-    <!-- ================= MOTION (video portfolio) =================
-         Clips marked data-stock are licensed stock stand-ins (Mixkit free license) until Matt's own
-         footage arrives. Replace the mp4 + poster jpg pair in assets/video/ and update the title. -->
-    <section class="reel" id="motion">
-      <div class="container reel-head" data-scene>
-        <div>
-          <span class="kicker">Motion</span>
-          <h2 class="lines"><span class="line"><span>Footage <span class="display-i">that moves</span></span></span></h2>
-        </div>
-        <p class="lede" data-reveal>Reveals, orbits and top-downs, in 4K. Tap any clip to watch it full screen.</p>
-      </div>
-      <div class="container reel-grid">
-        <button type="button" class="reel-item r-wide" data-stock data-full="assets/video/mountain-road.mp4" data-title="Mountain road" data-cat="Automotive &amp; route">
-          <video muted loop playsinline preload="none" poster="assets/video/mountain-road.jpg" data-autoplay><source data-src="assets/video/mountain-road.mp4" type="video/mp4"></video>
-          <span class="reel-meta"><span class="reel-cat">Automotive &amp; route</span><span class="reel-title">Mountain road</span><span class="reel-dur">0:12</span></span>
-        </button>
-        <button type="button" class="reel-item r-tall" data-stock data-full="assets/video/coast-topdown.mp4" data-title="Rock and surf, top-down" data-cat="Landscape">
-          <video muted loop playsinline preload="none" poster="assets/video/coast-topdown.jpg" data-autoplay><source data-src="assets/video/coast-topdown.mp4" type="video/mp4"></video>
-          <span class="reel-meta"><span class="reel-cat">Landscape</span><span class="reel-title">Rock and surf, top-down</span><span class="reel-dur">0:12</span></span>
-        </button>
-        <button type="button" class="reel-item" data-stock data-full="assets/video/property-reveal.mp4" data-title="Property reveal" data-cat="Real estate">
-          <video muted loop playsinline preload="none" poster="assets/video/property-reveal.jpg" data-autoplay><source data-src="assets/video/property-reveal.mp4" type="video/mp4"></video>
-          <span class="reel-meta"><span class="reel-cat">Real estate</span><span class="reel-title">Property reveal</span><span class="reel-dur">0:12</span></span>
-        </button>
-        <button type="button" class="reel-item" data-stock data-full="assets/video/construction-progress.mp4" data-title="Construction progress" data-cat="Commercial">
-          <video muted loop playsinline preload="none" poster="assets/video/construction-progress.jpg" data-autoplay><source data-src="assets/video/construction-progress.mp4" type="video/mp4"></video>
-          <span class="reel-meta"><span class="reel-cat">Commercial</span><span class="reel-title">Construction progress</span><span class="reel-dur">0:12</span></span>
-        </button>
-        <button type="button" class="reel-item r-tall" data-stock data-full="assets/video/tower-orbit.mp4" data-title="Tower orbit" data-cat="Commercial">
-          <video muted loop playsinline preload="none" poster="assets/video/tower-orbit.jpg" data-autoplay><source data-src="assets/video/tower-orbit.mp4" type="video/mp4"></video>
-          <span class="reel-meta"><span class="reel-cat">Commercial</span><span class="reel-title">Tower orbit</span><span class="reel-dur">0:10</span></span>
-        </button>
-        <button type="button" class="reel-item r-wide" data-stock data-full="assets/video/alpine-valley.mp4" data-title="Alpine river valley" data-cat="Landscape">
-          <video muted loop playsinline preload="none" poster="assets/video/alpine-valley.jpg" data-autoplay><source data-src="assets/video/alpine-valley.mp4" type="video/mp4"></video>
-          <span class="reel-meta"><span class="reel-cat">Landscape</span><span class="reel-title">Alpine river valley</span><span class="reel-dur">0:12</span></span>
-        </button>
-        <button type="button" class="reel-item" data-stock data-full="assets/video/neighborhood-topdown.mp4" data-title="Neighborhood overview" data-cat="Real estate">
-          <video muted loop playsinline preload="none" poster="assets/video/neighborhood-topdown.jpg" data-autoplay><source data-src="assets/video/neighborhood-topdown.mp4" type="video/mp4"></video>
-          <span class="reel-meta"><span class="reel-cat">Real estate</span><span class="reel-title">Neighborhood overview</span><span class="reel-dur">0:12</span></span>
-        </button>
-        <button type="button" class="reel-item" data-stock data-full="assets/video/city-establishing.mp4" data-title="City at dusk" data-cat="Commercial">
-          <video muted loop playsinline preload="none" poster="assets/video/city-establishing.jpg" data-autoplay><source data-src="assets/video/city-establishing.mp4" type="video/mp4"></video>
-          <span class="reel-meta"><span class="reel-cat">Commercial</span><span class="reel-title">City at dusk</span><span class="reel-dur">0:12</span></span>
-        </button>
-        <button type="button" class="reel-item r-full" data-stock data-full="assets/video/lagoon-reveal.mp4" data-title="Lagoon reveal" data-cat="Travel">
-          <video muted loop playsinline preload="none" poster="assets/video/lagoon-reveal.jpg" data-autoplay><source data-src="assets/video/lagoon-reveal.mp4" type="video/mp4"></video>
-          <span class="reel-meta"><span class="reel-cat">Travel</span><span class="reel-title">Lagoon reveal</span><span class="reel-dur">0:12</span></span>
-        </button>
       </div>
     </section>
 

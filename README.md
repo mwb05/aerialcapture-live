@@ -88,23 +88,20 @@ filmstrip, a process section and an on-page booking form (service, location, dat
 (jsdelivr CDN) drives desktop wheel scrolling in step with GSAP; touch devices keep native scrolling.
 All 46 photos and every original asset are untouched.
 
-### Video assets - STOCK STAND-INS, replace with Matt's footage
+### Only Matt's own shots (2026-11-12)
 
-`assets/video/` holds compressed (H.264, no audio, 10-14 s, faststart) clips from Mixkit's free
-license (free for commercial use, no attribution). They are placeholders until Matt sends his own
-footage. Each clip is an `.mp4` + same-name `.jpg` poster. To swap one, keep the file name (or update
-the reel tile's `data-full`, `data-src`, `poster` and title in `index.html`, and drop its `data-stock`).
+Matt's rule: nothing on this site that he did not shoot. The Mixkit stock clips the v5 rebuild
+shipped with (hero video, two service-card clips, the 9-clip "Motion" reel) are gone, and so is
+`assets/video/`. The hero is now his Skogafoss aerial (`assets/hero-skogafoss-2400.jpg` and
+`-1200.jpg`, made from `..\assets\max_0091-*.jpeg`), and the videography and real-estate cards
+use his Tuscany hill-town and vineyard-estate photos. Every image on the site comes from the 46
+originals in `..\assets\` (archived from his own old site). Never add stock stand-ins again.
 
-| File | Used for | Mixkit id |
-|---|---|---|
-| hero-1080.mp4 / hero-720.mp4 / hero-1080.jpg | Hero (720 on phones) | 4998 |
-| alpine-valley | Videography card + reel | 15919 |
-| neighborhood-topdown | Real estate card + reel | 48394 |
-| mountain-road, coast-topdown, property-reveal, construction-progress, tower-orbit, city-establishing, lagoon-reveal | Reel | 41537, 51502, 27543, 42333, 49861, 42338, 5008 |
-
-Encode new footage the same way (ffmpeg):
-`-an -vf scale=1280:-2,fps=24 -c:v libx264 -preset slow -crf 27 -movflags +faststart`
-(hero: 1920 wide, crf 22). Keep clips around 1-4 MB.
+When Matt sends his own footage: the reel grid, video viewer and lazy-video code are still in
+`css/style.css` and `js/main.js` (`.reel`, `.vlb`, `video[data-autoplay]`, `.vhero-video`), so a
+`<video class="vhero-video">` hero or a `.reel` section can come back with his clips. Encode with
+ffmpeg: `-an -vf scale=1280:-2,fps=24 -c:v libx264 -preset slow -crf 27 -movflags +faststart`
+(hero: 1920 wide, crf 22), clips around 1-4 MB.
 
 QA harness for this rebuild: `_qa/v5/shots.mjs` (desktop + phone viewport shots, overflow sweep, JS
 errors). Design audit notes: `../design-audit.md`.
