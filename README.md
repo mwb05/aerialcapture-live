@@ -1,4 +1,14 @@
-# Aerial Capture Photography - Static Site (video rebuild v5, 2026-11-04)
+# Aerial Capture Photography - Static Site
+
+> **2026-11-17: this repo now serves the new five-page drone-film site** (index, portfolio,
+> services, about, contact + site.css, site.js, media/). Its source of truth is
+> `C:\ClaudeCode\jarvis\public\previews\aerial-capture`; publish with
+> `node C:\ClaudeCode\websites\aerialcapturephotography\_build\publish-new-site.mjs --push`.
+> gallery.html is a redirect to portfolio.html. The legal pages (privacy, terms, accessibility) and
+> the css/ js/ assets/ they use are kept from the old site. Everything below describes the OLD
+> v5 site and its retired `build.mjs --sync`.
+
+## Old site: video rebuild v5, 2026-11-04
 
 Pure static HTML/CSS/JS. No framework, no bundler. The one build step regenerates the gallery
 grid from a manifest and validates the site; see **Build** below.

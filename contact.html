@@ -1,151 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-type="service">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact | Aerial Capture Photography</title>
-  <meta name="description" content="Book a drone photography or videography shoot — automotive, nature, or something new. Reach Aerial Capture Photography by email, Instagram, or the contact form.">
-  <link rel="canonical" href="https://aerialcapturephotography.com/contact.html">
-  <meta name="theme-color" content="#05080D">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Contact | Aerial Capture Photography">
-  <meta property="og:description" content="Book a drone photography or videography shoot — automotive, nature, or something new.">
-  <meta property="og:image" content="https://aerialcapturephotography.com/assets/full/dji-fly-20250421-184918.jpg">
-  <meta property="og:url" content="https://aerialcapturephotography.com/contact.html">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact | Aerial Capture Photography</title>
+<meta name="description" content="Book a drone shoot: tell me the place, the date and the use, and I will come back with a flight plan and a quote.">
+<meta name="page-type" content="service">
+<meta name="site-kind" content="other">
+<meta name="theme-color" content="#000000">
+<script>document.documentElement.classList.add('m-enter');</script>
+<meta property="og:title" content="Aerial Capture Photography">
+<meta property="og:description" content="Aerial stills and 4K drone film, flown under an FAA Part 107 certificate.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://aerialcapturephotography.com/media/11-hero-florence-arno-sunset.jpg?v=5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Cpath d='M6 22 16 8l10 14' fill='none' stroke='%23d4ad3c' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.css">
+<link rel="stylesheet" href="site.css?v=7">
 </head>
-<body class="is-loaded">
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="progress" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="cursor" data-label="View" aria-hidden="true"></div>
+<body>
+<a class="skip" href="#main">Skip to content</a>
 
-  <header class="site-header solid">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <img src="assets/logo.png" alt="" width="29" height="38">
-        <span class="brand-text">Aerial Capture Photography<small>FAA Part 107 &middot; Drone Photo &amp; Video</small></span>
-      </a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
-        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-      </button>
-      <nav class="site-nav" id="site-nav" aria-label="Main">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="index.html#services">Services</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html" aria-current="page">Contact</a></li>
-        </ul>
-        <p class="nav-cta">Have a shoot in mind? <a href="mailto:aerialcapturephotography@gmail.com">aerialcapturephotography@gmail.com</a></p>
-      </nav>
+<header class="nav" id="nav">
+  <a class="brand" href="index.html" aria-label="Aerial Capture Photography, home">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 23 16 7l11 16" fill="none" stroke="#d4ad3c" stroke-width="2.4"/><path d="M10.5 23h11" stroke="#f0f0fa" stroke-width="2.4"/></svg>
+    <span>Aerial Capture</span>
+  </a>
+  <ul id="site-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" aria-current="page">Contact</a></li>
+  </ul>
+  <a class="btn solid" data-magnetic href="contact.html"><span>Book a flight</span></a>
+  <button class="menu-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+</header>
+
+<main id="main">
+  <!-- Contact (2026-11-18, Matt: "the pages need to be full"): the live site's booking form, which
+       opens a filled-in email to the pilot (site.js), the email / Instagram card, then the brief. -->
+  <section class="sec" id="book">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <div><p class="eyebrow"><b>Contact</b></p><h2>Let's capture something</h2></div>
+        <p class="lede">Real estate, commercial, automotive or landscape: tell me what you need shot, where and roughly when, and I'll come back with availability and a quote.</p>
+      </div>
+      <div class="contact-grid" data-reveal>
+        <form class="cform" id="contactForm" action="mailto:aerialcapturephotography@gmail.com" method="post" enctype="text/plain" data-mailto="aerialcapturephotography@gmail.com">
+          <div><label for="cf-name">Name</label><input type="text" id="cf-name" name="name" placeholder="Your name" autocomplete="name"></div>
+          <div><label for="cf-email">Email *</label><input type="email" id="cf-email" name="email" placeholder="you@example.com" autocomplete="email" required></div>
+          <!-- 2026-11-18, Matt: "very busy": the six service pills are one dropdown now (same name="service",
+               so site.js still reads it), and the fields sit on a lighter fill so the boxes stand out. -->
+          <div><label for="cf-service">What are we shooting?</label><select id="cf-service" name="service">
+            <option>Aerial photography</option>
+            <option>Aerial videography</option>
+            <option>Real estate</option>
+            <option>Commercial</option>
+            <option>Automotive</option>
+            <option>Something else</option>
+          </select></div>
+          <div><label for="cf-date">Preferred date</label><input type="date" id="cf-date" name="date"></div>
+          <div class="full"><label for="cf-location">Location</label><input type="text" id="cf-location" name="location" placeholder="City or address" autocomplete="off"></div>
+          <div class="full"><label for="cf-message">The shoot *</label><textarea id="cf-message" name="message" placeholder="What are we shooting, where, and when?" required></textarea></div>
+          <p class="fine full">We use these details only to reply and quote your shoot, and never sell them. See our <a href="https://aerialcapturephotography.com/privacy.html" target="_top">Privacy Policy</a>.</p>
+          <button class="btn solid" data-magnetic type="submit"><span>Send request</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        </form>
+        <aside class="reach">
+          <h3>Prefer email or DM?</h3>
+          <div><small>Email</small><a href="mailto:aerialcapturephotography@gmail.com">aerialcapturephotography@gmail.com</a></div>
+          <div><small>Instagram</small><a href="https://www.instagram.com/aerialcapturephotography/" target="_top">@aerialcapturephotography</a></div>
+          <div><small>Reply time</small><span>Usually within a day, with availability, a plan and a quote.</span></div>
+        </aside>
+      </div>
     </div>
-  </header>
+  </section>
 
-  <main id="main">
-    <section class="page-hero">
-      <div class="container">
-        <span class="kicker" data-reveal="fade">Contact</span>
-        <h1 class="lines"><span class="line"><span>Let's capture</span></span><span class="line"><span class="display-i">something</span></span></h1>
-        <p class="lede" data-reveal data-delay="2">Real estate, commercial, automotive or landscape: tell me what you need shot, where and roughly when, and I'll come back with availability and a quote.</p>
+  <section class="close" id="contact">
+    <img src="media/12-seydisfjordur-fjord-twilight.jpg?v=5" alt="" loading="lazy" decoding="async">
+    <div class="wrap" data-reveal>
+      <h2>Book a drone shoot</h2>
+      <p class="lede">Tell me three things and I will come back with a flight plan and a quote.</p>
+      <div class="actions">
+        <a class="btn solid" data-magnetic href="#book"><span>Fill in the form</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+        <a class="btn" data-magnetic href="mailto:aerialcapturephotography@gmail.com"><span>Email the pilot</span></a>
       </div>
-    </section>
-
-    <section class="section">
-      <div class="container contact-layout">
-        <div data-reveal>
-          <!-- Until a Formspree form ID exists, submissions open the visitor's mail client
-               prefilled (see js/main.js). Swap the action to the real Formspree URL and
-               remove data-mailto-fallback to switch over. -->
-          <form id="contact-form" action="mailto:aerialcapturephotography@gmail.com" method="POST" data-mailto-fallback="aerialcapturephotography@gmail.com">
-            <div class="form-field">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name">
-            </div>
-            <div class="form-field">
-              <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
-              <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required>
-            </div>
-            <fieldset class="form-field chips">
-              <legend>What are we shooting?</legend>
-              <label><input type="radio" name="service" value="Aerial photography" checked><span>Aerial photography</span></label>
-              <label><input type="radio" name="service" value="Drone videography"><span>Drone videography</span></label>
-              <label><input type="radio" name="service" value="Real estate"><span>Real estate</span></label>
-              <label><input type="radio" name="service" value="Commercial"><span>Commercial</span></label>
-              <label><input type="radio" name="service" value="Automotive"><span>Automotive</span></label>
-              <label><input type="radio" name="service" value="Something else"><span>Something else</span></label>
-            </fieldset>
-            <div class="form-row">
-              <div class="form-field">
-                <label for="location">Location</label>
-                <input type="text" id="location" name="location" placeholder="City or address" autocomplete="off">
-              </div>
-              <div class="form-field">
-                <label for="date">Preferred date</label>
-                <input type="date" id="date" name="date">
-              </div>
-            </div>
-            <div class="form-field">
-              <label for="message">The shoot <span class="req" aria-hidden="true">*</span></label>
-              <textarea id="message" name="message" placeholder="What are we shooting, where, and when?" required></textarea>
-            </div>
-            <p class="form-note">We use these details only to reply and quote your shoot, and never sell them. See our <a href="privacy.html">Privacy Policy</a>.</p>
-            <button type="submit" class="btn btn-primary">Send message <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
-          </form>
-          <div class="contact-direct">
-            <span class="kicker" style="margin:0">Prefer email or DM?</span>
-            <a href="mailto:aerialcapturephotography@gmail.com">aerialcapturephotography@gmail.com</a>
-            <a href="https://www.instagram.com/aerialcapturephotography/" target="_blank" rel="noopener">@aerialcapturephotography on Instagram</a>
-          </div>
-        </div>
-        <div class="contact-media curtain">
-          <img src="assets/full/dji-fly-20250514-102446.jpg" alt="Forested alpine valley climbing toward bare granite peaks" loading="lazy" decoding="async" width="1600" height="1200">
-        </div>
+      <div class="brief">
+        <div><span class="n">01</span><strong>The place</strong><p>An address or an area. Airspace is checked and authorized before the drone leaves the case.</p></div>
+        <div><span class="n">02</span><strong>The date</strong><p>Golden hour, blue hour or midday. The flight is planned around the light and the wind.</p></div>
+        <div><span class="n">03</span><strong>The use</strong><p>A listing, a brand film, a social cut or a print. It sets the moves, the format and the delivery.</p></div>
       </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <a class="footer-brand" href="index.html">
-            <img src="assets/logo-stacked.png" alt="Aerial Capture Photography" width="133" height="110" loading="lazy">
-          </a>
-          <p class="footer-tag">Drone photography and videography for real estate, commercial, automotive and landscape work. FAA Part 107 certified remote pilot.</p>
-        </div>
-        <nav class="footer-nav" aria-label="Footer">
-          <h2 class="footer-h">Explore</h2>
-          <ul>
-            <li><a href="index.html#services">Services</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </nav>
-        <div class="footer-contact">
-          <h2 class="footer-h">Contact</h2>
-          <a href="mailto:aerialcapturephotography@gmail.com">aerialcapturephotography@gmail.com</a>
-          <a href="https://www.instagram.com/aerialcapturephotography/" target="_blank" rel="noopener">Instagram</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>&copy; 2026 Aerial Capture Photography. All rights reserved.</span>
-        <nav class="legal-links" aria-label="Legal"><a href="privacy.html">Privacy Policy</a><a href="privacy.html#cookies">Cookie Notice</a><a href="terms.html">Terms of Use</a><a href="accessibility.html">Accessibility</a></nav>
-        <span>FAA Part 107 certified &middot; Shot from above.</span>
-      </div>
+    </div>
+    <footer class="close-foot wrap">
+    <div class="foot-top">
+      <a class="foot-brand" href="index.html" aria-label="Aerial Capture Photography, home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 23 16 7l11 16" fill="none" stroke="#d4ad3c" stroke-width="2.4"/><path d="M10.5 23h11" stroke="#f0f0fa" stroke-width="2.4"/></svg><span>Aerial Capture</span></a>
+      <nav aria-label="Footer"><a href="index.html">Home</a><a href="portfolio.html">Portfolio</a><a href="services.html">Services</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Aerial Capture Photography &middot; All footage flown and shot by Aerial Capture</span>
+      <div class="foot-social"><a href="https://www.instagram.com/aerialcapturephotography/" target="_top">Instagram</a><a href="mailto:aerialcapturephotography@gmail.com">Email</a><a href="https://aerialcapturephotography.com/privacy.html" target="_top">Privacy</a><a href="https://aerialcapturephotography.com/terms.html" target="_top">Terms</a><a href="https://aerialcapturephotography.com/accessibility.html" target="_top">Accessibility</a><a href="#main">Back to top</a></div>
     </div>
   </footer>
+  </section>
+</main>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
-  <script src="js/main.js" defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/MotionPathPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js"></script>
+<script src="site.js?v=7"></script>
 </body>
 </html>
